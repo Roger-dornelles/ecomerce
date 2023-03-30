@@ -2,6 +2,12 @@
 
 # 	:rotating_light: :construction: EM DESENVOLVIMENTO 	:rotating_light:
 
+### :pencil2:  Descrição
+
+- Projeto criado para representar um ecommerce onde o cliente pode colocar um produto a venda ou fazer uma compra de produto.
+
+------
+
 
 ## 	:hammer_and_wrench: Tecnologias
 
