@@ -1,5 +1,7 @@
 # ecommerce
 
+# :construction: EM DESENVOLVIMENTO
+
 
 ## 	:hammer_and_wrench: Tecnologias
 
