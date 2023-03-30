@@ -1,6 +1,6 @@
 # ecommerce
 
-# :construction: EM DESENVOLVIMENTO
+# 	:rotating_light: :construction: EM DESENVOLVIMENTO 	:rotating_light:
 
 
 ## 	:hammer_and_wrench: Tecnologias
