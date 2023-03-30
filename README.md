@@ -20,7 +20,7 @@
 
 ## :wrench: Instalação
 
-- No  terminal ( prompt de comando ) de sua preferencia fazer o clone doprojeto usando o comando :point_down:
+- No  terminal ( prompt de comando ) de sua preferencia fazer o clone do projeto usando o comando :point_down:
 ```
 git clone https://github.com/Roger-dornelles/ecomerce
 ```
