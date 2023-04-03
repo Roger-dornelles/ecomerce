@@ -12,7 +12,7 @@ export default {
       }
 
       let response = await signinService({ email, password });
-     
+
       if (response.error) {
         return {
           error: true,
