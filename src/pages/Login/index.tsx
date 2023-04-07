@@ -1,8 +1,10 @@
-import { useState } from 'react';
+import { useState, useContext } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import * as Styled from './styled';
 import { BsEnvelopeAtFill, BsKeyFill, BsX } from 'react-icons/bs';
 import api from '../../api/signin';
+import { UserContext } from '../../context/userContext';
+import Cookies from 'js-cookie';
 
 export const Login = () => {
   const [email, setEmail] = useState<string>('');
@@ -13,6 +15,7 @@ export const Login = () => {
   const [disabled, setDisabled] = useState<boolean>(false);
 
   const navigate = useNavigate();
+  const { setUser } = useContext(UserContext);
 
   const handleConfirmSignin = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -49,10 +52,13 @@ export const Login = () => {
         }
 
         setSuccess(response.message);
+        response.data && Cookies.set('token', response.data);
+
         setLoading(false);
         setTimeout(() => {
           setDisabled(false);
           setSuccess('');
+
           navigate('/');
         }, 1950);
       }

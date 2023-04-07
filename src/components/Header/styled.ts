@@ -38,6 +38,13 @@ export const Header = styled.header`
           text-decoration: none;
           color: #fff;
         }
+
+        button {
+          border: none;
+          cursor: pointer;
+          background-color: transparent;
+          color: #fff;
+        }
       }
     }
   }
