@@ -8,6 +8,7 @@ import Cookies from 'js-cookie';
 import JwtVerify from '../../Jwt/index';
 import { JwtPayload } from 'jsonwebtoken';
 
+
 export const Header = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
@@ -17,13 +18,18 @@ export const Header = () => {
     token && Object(setUser)({ token: token });
 
     const jwt = async () => {
-      const token: string | undefined = Cookies.get('token');
-      const decoded = (await JwtVerify(token as string)) as JwtPayload | JwtPayloads;
-      Object(setUser)({
-        id: decoded?.id,
-        email: decoded?.email,
-        token: token,
-      });
+      try {
+        if (token) {
+          const decoded = (await JwtVerify(token as string)) as JwtPayload | JwtPayloads;
+          Object(setUser)({
+            id: decoded?.id,
+            email: decoded?.email,
+            token: token,
+          });
+        }
+      } catch (error) {
+        return {};
+      }
     };
     jwt();
   }, [token]);

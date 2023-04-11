@@ -1,4 +1,5 @@
 export type UserType = {
+  id?: number | string;
   name: string;
   cpf: string;
   email: string;
@@ -7,4 +8,6 @@ export type UserType = {
   number: string;
   contact: string;
   state: string;
+  createdAt?: string;
+  updatedAt?: string;
 };
