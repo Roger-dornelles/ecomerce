@@ -1,5 +1,5 @@
-import Cookies from 'js-cookie';
 import { axiosClient } from '../axios/config';
+import ErrorStatus401 from '../hooks/Error';
 
 type UserDataType = {
   id: number;
@@ -16,14 +16,6 @@ type UserDataType = {
 
 const updateUserService = async ({ id, userData }: UserDataType) => {
   try {
-    if (!id) {
-      return {
-        error: true,
-        message: 'Usuário não encontrado.',
-        data: null,
-      };
-    }
-
     const response = await axiosClient({
       url: `/user/${id}`,
       method: 'PUT',
@@ -49,7 +41,7 @@ const updateUserService = async ({ id, userData }: UserDataType) => {
       message: response.data.message,
       data: response.data.data,
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       error: true,
       message: 'Ocorreu um erro, tente mais tarde',

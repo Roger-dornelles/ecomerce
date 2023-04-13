@@ -8,29 +8,43 @@ import Cookies from 'js-cookie';
 import JwtVerify from '../../Jwt/index';
 import { JwtPayload } from 'jsonwebtoken';
 
-
 export const Header = () => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
   const token: string | undefined = Cookies.get('token');
   useEffect(() => {
-    token && Object(setUser)({ token: token });
-
-    const jwt = async () => {
+    const jwt = () => {
       try {
-        if (token) {
-          const decoded = (await JwtVerify(token as string)) as JwtPayload | JwtPayloads;
+        const decoded = JwtVerify(token as string) as JwtPayload | JwtPayloads;
+
+        if (decoded.isValidToken) {
           Object(setUser)({
-            id: decoded?.id,
-            email: decoded?.email,
-            token: token,
+            id: decoded.decoded.id,
+            email: decoded.decoded.email,
+            token: decoded.isValidToken,
           });
+          return;
+        } else {
+          Cookies.remove('token');
+          Object(setUser)({
+            id: 0,
+            email: '',
+            token: false,
+          });
+          return;
         }
       } catch (error) {
-        return {};
+        Cookies.remove('token');
+        Object(setUser)({
+          id: 0,
+          email: '',
+          token: false,
+        });
+        return;
       }
     };
+
     jwt();
   }, [token]);
 

@@ -1,22 +1,37 @@
+import Cookies from 'js-cookie';
 import { axiosClient } from '../axios/config';
-import JWT from 'jsonwebtoken';
+import jwt_decode from 'jwt-decode';
+import { JwtPayloads } from '../context/userContext';
 
-const JwtVerify = async (token: string) => {
+const JwtVerify = (token: string) => {
   try {
-    if (token) {
-      const decoded = await JWT.decode(token);
+    let decoded: JwtPayloads = jwt_decode(token);
 
+    let currentDate = new Date();
+    let isValidToken: boolean = false;
+
+    // JWT exp is in seconds
+
+    if (decoded.exp * 1000 < currentDate.getTime()) {
+      Cookies.remove('token');
+
+      return {
+        decoded: null,
+        isValidToken: false,
+      };
+    } else {
       axiosClient.defaults.headers.common['Authorization'] = `Bearer ${token}`;
 
-      return decoded;
-    } else {
-      return null;
+      return {
+        decoded: decoded,
+        isValidToken: true,
+      };
     }
   } catch (error) {
+    Cookies.remove('token');
     return {
-      erro: true,
-      message: 'Ocorreu um erro',
-      data: null,
+      decoded: null,
+      isValidToken: false,
     };
   }
 };
