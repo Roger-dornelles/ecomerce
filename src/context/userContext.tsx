@@ -1,4 +1,4 @@
-import { ReactElement, createContext, useState } from 'react';
+import { ReactElement, createContext, useEffect, useState } from 'react';
 
 type Props = {
   children: ReactElement;
@@ -7,6 +7,11 @@ type Props = {
 export interface JwtPayloads {
   id: number;
   email: string;
+  exp: number;
+  isValidToken: boolean;
+  decoded: {
+    decoded: { email: string; id: number };
+  };
 }
 
 export type InitialState = {

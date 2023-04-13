@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.section`
@@ -19,6 +20,14 @@ export const Container = styled.section`
     flex-direction: column;
     justify-content: center;
     background-color: #f5f5f5;
+
+    h2 {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+      margin-bottom: 2rem;
+    }
 
     label {
       margin: 0 auto;
@@ -100,6 +109,18 @@ export const Container = styled.section`
         box-shadow: 4px 3px 5px #ccc;
       }
     }
+  }
+`;
+
+export const Cadastro = styled.span`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 2rem;
+  a {
+    color: #000;
+
+    padding-left: 0.4rem;
   }
 `;
 

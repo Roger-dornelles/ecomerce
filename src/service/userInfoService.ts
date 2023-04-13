@@ -1,15 +1,8 @@
 import { axiosClient } from '../axios/config';
+import ErrorStatus401 from '../hooks/Error';
 
 const userInfoService = async (id: number) => {
   try {
-    if (!id) {
-      return {
-        error: true,
-        message: 'ID invalido',
-        data: null,
-      };
-    }
-
     const response = await axiosClient({
       url: `/user/info/${id}`,
       method: 'GET',
@@ -29,6 +22,7 @@ const userInfoService = async (id: number) => {
       data: response.data.data,
     };
   } catch (error) {
+    ErrorStatus401(error);
     return {
       error: true,
       message: 'Ocorreu um erro, tente mais tarde',
