@@ -1,6 +1,6 @@
 import * as styled from './styled';
 import { useContext, useEffect, useState } from 'react';
-import { UserContext } from '../../context/userContext';
+import { JwtPayloads, UserContext } from '../../context/userContext';
 import { useNavigate } from 'react-router';
 import apiUserInfo from '../../api/userInfo';
 import apiState from '../../api/states';
@@ -9,6 +9,9 @@ import { Link } from 'react-router-dom';
 import { Error, Warning, Success } from '../../globalCss';
 import { BsPencilSquare } from 'react-icons/bs';
 import apiUpdateUser from '../../api/updateUser';
+import Cookies from 'js-cookie';
+import JwtVerify from '../../Jwt/index';
+import { JwtPayload } from 'jwt-decode';
 
 type StatesType = {
   id: number;
@@ -135,7 +138,7 @@ const Profile = () => {
       }
     };
     userInfoAll();
-  }, [user.id]);
+  }, [user.id, user.token]);
 
   const handleSubmit = async (e: React.SyntheticEvent<EventTarget>) => {
     e.preventDefault();
@@ -169,7 +172,7 @@ const Profile = () => {
       }
 
       if (createPassword) {
-        if (newPassword === confirmNewPassword) {
+        if (newPassword && confirmNewPassword !== '' && newPassword === confirmNewPassword) {
           const regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{9,}$/;
 
           if (!regex.test(newPassword)) {

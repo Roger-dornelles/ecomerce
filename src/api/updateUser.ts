@@ -16,17 +16,9 @@ export type UserDataType = {
 export default {
   updateUser: async ({ id, userData }: UserDataType) => {
     try {
-      if (!id) {
-        return {
-          error: true,
-          message: 'Usuário não encontrado',
-          data: null,
-        };
-      }
-
       const response = await updateUserService({ id, userData });
 
-      if (response.error) {
+      if (response?.error) {
         return {
           error: true,
           message: response.message,
@@ -37,7 +29,7 @@ export default {
       return {
         error: false,
         message: null,
-        data: response.data,
+        data: response?.data,
       };
     } catch (error) {
       return {

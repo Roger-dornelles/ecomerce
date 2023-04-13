@@ -71,6 +71,7 @@ export const Login = () => {
   return (
     <Styled.Container>
       <form onSubmit={handleConfirmSignin}>
+        <h2>login</h2>
         {warning && <Styled.Warning>{warning}</Styled.Warning>}
         {success && <Styled.Success>{success}</Styled.Success>}
         <label>
@@ -101,6 +102,10 @@ export const Login = () => {
           <Link to="/">Cancelar</Link>
           <button>{loading ? 'Aguarde' : 'Login'}</button>
         </div>
+        <Styled.Cadastro>
+          Você é novo?
+          <Link to={'/cadastro'}>Criar cadastro</Link>
+        </Styled.Cadastro>
       </form>
     </Styled.Container>
   );
