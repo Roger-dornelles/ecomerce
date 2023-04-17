@@ -10,3 +10,9 @@ export type ProductType = {
   value: string;
   photosID: number[] | number;
 };
+
+export type AddProductType = {
+  id: number;
+
+  form: any;
+};

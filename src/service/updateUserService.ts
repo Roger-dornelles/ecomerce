@@ -1,5 +1,5 @@
 import { axiosClient } from '../axios/config';
-import ErrorStatus401 from '../hooks/Error';
+import ErrorStatus401 from '../hooks/ErrorStatus401';
 
 type UserDataType = {
   id: number;
