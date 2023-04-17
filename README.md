@@ -16,6 +16,7 @@
 - Styled-components
 - Prettier
 - Eslint
+- Jwt
 
 
 ## :wrench: Instalação

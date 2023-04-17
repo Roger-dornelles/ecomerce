@@ -78,3 +78,12 @@ export const Input = styled.div`
     }
   }
 `;
+
+export const ButtonAddProduct = styled.button`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #e86a33 !important;
+  padding: 0.3rem;
+  border-radius: 4px;
+`;
