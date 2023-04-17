@@ -25,6 +25,7 @@ export const Error = styled.div`
   padding: 0.2rem;
   color: #000;
   top: 0px;
+  left: 30%;
   border-radius: 5px;
 `;
 

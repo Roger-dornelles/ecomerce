@@ -54,6 +54,10 @@ export const Header = () => {
     window.location.reload();
   };
 
+  const handleNavigateAddProduct = () => {
+    navigate('/adicionar/produto');
+  };
+
   return (
     <>
       <Styled.Header>
@@ -88,6 +92,12 @@ export const Header = () => {
             {user.token && (
               <li>
                 <Link to={'/profile'}>Perfil</Link>
+              </li>
+            )}
+
+            {user.token && (
+              <li>
+                <Styled.ButtonAddProduct onClick={handleNavigateAddProduct}>Adicionar Produto</Styled.ButtonAddProduct>
               </li>
             )}
 

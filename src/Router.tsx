@@ -5,6 +5,7 @@ import { Cadastro } from './pages/Cadastro';
 import { PrivateRoute } from './helpers/authHandler';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
+import AddProduct from './pages/AddProduct';
 
 const Router = () => {
   return (
@@ -17,6 +18,15 @@ const Router = () => {
         element={
           <PrivateRoute>
             <Profile />
+          </PrivateRoute>
+        }
+      />
+
+      <Route
+        path="/adicionar/produto"
+        element={
+          <PrivateRoute>
+            <AddProduct />
           </PrivateRoute>
         }
       />
