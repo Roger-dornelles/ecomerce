@@ -37,6 +37,7 @@ export const ProductAll = styled.div`
 
   &:hover {
     border: 1px solid #dddddd;
+    box-shadow: 2px 5px 30px #ccc;
   }
 
   a {
