@@ -8,7 +8,11 @@ import Cookies from 'js-cookie';
 import JwtVerify from '../../Jwt/index';
 import { JwtPayload } from 'jsonwebtoken';
 
-export const Header = () => {
+type Props = {
+  children: any;
+};
+
+export const Header = ({ children }: Props) => {
   const { user, setUser } = useContext(UserContext);
   const navigate = useNavigate();
 
@@ -77,6 +81,10 @@ export const Header = () => {
 
         <nav>
           <ul>
+            <li>
+              <Link to={'/'}>Produtos</Link>
+            </li>
+
             {!user.token && (
               <li>
                 <Link to={`/login`}>Login</Link>
@@ -85,7 +93,7 @@ export const Header = () => {
 
             {!user.token && (
               <li>
-                <Link to={`/cadastro`}>Criar cadastro</Link>
+                <Link to={`/cadastro`}>Cadastrar-se</Link>
               </li>
             )}
 
@@ -109,6 +117,7 @@ export const Header = () => {
           </ul>
         </nav>
       </Styled.Header>
+      {children}
     </>
   );
 };

@@ -31,14 +31,13 @@ export const Home = () => {
 
   return (
     <Styled.Container>
-      <Header />
       <Styled.Section>
         {error && <Error>{error}</Error>}
         {productAll &&
           productAll.map((product) => {
             return (
               <Styled.ProductAll key={product.id}>
-                <Link to={''}>
+                <Link to={`/produto/${product.id}`}>
                   <img src={Object(product).photosID[0].link} alt={product.name} />
                   <p>{product.name}</p>
                   <p>{product.description}</p>
@@ -46,7 +45,7 @@ export const Home = () => {
                     Valor: <strong>{product.value}</strong>
                   </p>
                   <p>Quantidade disponível: {product.quantity}</p>
-                  <span>Aceita troca: {product.isInstallments ? 'sim' : 'não'}</span>
+                  <span>Negociável: {product.isInstallments ? 'sim' : 'não'}</span>
 
                   <p>Publicado em {product.createdAt.substring(0, 10).split('-').reverse().join('/')}</p>
                 </Link>

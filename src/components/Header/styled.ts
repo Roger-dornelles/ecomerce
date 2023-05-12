@@ -1,18 +1,18 @@
 import styled from 'styled-components';
 
 export const Header = styled.header`
-  width: 90vw;
+  width: 90%;
   height: 5.5rem;
-  margin: auto;
+  margin: 0 auto;
   padding-top: 1.5rem;
   background-color: #82aae3;
   display: flex;
   justify-content: space-between;
   color: #fff;
-  border-radius: 0% 0% 10px 10px;
+  border-radius: 0px 0px 10px 10px;
 
   div {
-    margin-left: 2rem;
+    padding-left: 2rem;
 
     display: flex;
     flex-direction: column;
@@ -32,11 +32,12 @@ export const Header = styled.header`
       list-style: none;
 
       li {
-        padding-right: 2.5rem;
+        padding-right: 1rem;
 
         a {
           text-decoration: none;
           color: #fff;
+          flex-wrap: wrap;
         }
 
         button {

@@ -6,6 +6,7 @@ import { PrivateRoute } from './helpers/authHandler';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import AddProduct from './pages/AddProduct';
+import DisplayOneProduct from './pages/DisplayOneProduct';
 
 const Router = () => {
   return (
@@ -30,6 +31,8 @@ const Router = () => {
           </PrivateRoute>
         }
       />
+
+      <Route path="/produto/:id" element={<DisplayOneProduct />} />
 
       <Route path="*" element={<NotFound />} />
     </Routes>
