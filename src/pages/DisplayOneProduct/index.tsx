@@ -53,6 +53,13 @@ const displayOneProduct = () => {
       }
     };
     displayProduct();
+
+    addProductCart &&
+      addProductCart.filter((productArray: { id: number; disabled: boolean }) => {
+        if (productArray.id === Number(id)) {
+          setDisabled(productArray.disabled);
+        }
+      });
   }, []);
 
   const pages = productImage && Math.ceil(productImage.length / itemsPerPage);
@@ -87,7 +94,6 @@ const displayOneProduct = () => {
         productArray.filter((productArray) => {
           if (productArray.id === product.id) {
             setDisabled(productArray.disabled);
-            console.log('console. ', productArray.disabled);
           }
         });
       });
@@ -103,16 +109,11 @@ const displayOneProduct = () => {
     productArray.filter((productArray) => {
       if (productArray.id === product.id) {
         setDisabled(productArray.disabled);
-        console.log('console. ', productArray.disabled);
       }
     });
 
-    let arrayProductsJSON = JSON.stringify(productArray);
-    Cookies.set('list', arrayProductsJSON);
     setAddProductCart(productArray);
   };
-
-  console.log('addPoduct Cart ', addProductCart);
 
   return (
     <styled.Container>

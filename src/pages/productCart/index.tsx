@@ -20,9 +20,9 @@ const productCart = () => {
 
   const [productList, setProductList] = useState<ProductProps[]>(addProductCart);
   const [quantityProduct, setQuantityProduct] = useState<any>([]);
-  console.log('CARRINHO ', productList);
+ 
   const handleButtonMinus = (item: ProductProps) => {
-    console.log('Menos', item);
+
     let productInArray: Number = 0;
     productList.filter((itemArray) => {
       if (itemArray.id === item.id) {
@@ -50,7 +50,6 @@ const productCart = () => {
     });
   };
 
-  let disabledButtonAddProduct: boolean = false;
   const handleButtonPlus = (item: ProductProps) => {
     if (item) {
       productList.filter((product) => {
