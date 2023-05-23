@@ -7,6 +7,7 @@ import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
 import AddProduct from './pages/AddProduct';
 import DisplayOneProduct from './pages/DisplayOneProduct';
+import ProductCart from './pages/productCart';
 
 const Router = () => {
   return (
@@ -14,6 +15,7 @@ const Router = () => {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/cadastro" element={<Cadastro />} />
+      <Route path="/carrinho" element={<ProductCart />} />
       <Route
         path="/profile"
         element={

@@ -2,19 +2,24 @@ import * as Styled from './styled';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
 import { BsSearch } from 'react-icons/bs';
-import { useContext, useEffect } from 'react';
+import { ReactElement, useContext, useEffect } from 'react';
 import { JwtPayloads, UserContext } from '../../context/userContext';
+import { AddCartContext } from '../../context/addCartContext';
 import Cookies from 'js-cookie';
 import JwtVerify from '../../Jwt/index';
 import { JwtPayload } from 'jsonwebtoken';
+import { BsBasket3Fill } from 'react-icons/bs';
 
 type Props = {
-  children: any;
+  children: ReactElement;
 };
 
 export const Header = ({ children }: Props) => {
   const { user, setUser } = useContext(UserContext);
+  const { addProductCart }: any = useContext(AddCartContext);
   const navigate = useNavigate();
+
+  // addProductCart.length === 0 && Cookies.remove('list');
 
   const token: string | undefined = Cookies.get('token');
   useEffect(() => {
@@ -91,11 +96,14 @@ export const Header = ({ children }: Props) => {
               </li>
             )}
 
-            {!user.token && (
-              <li>
-                <Link to={`/cadastro`}>Cadastrar-se</Link>
-              </li>
-            )}
+            <li>
+              <Link to={`/carrinho`}>
+                <p>
+                  <BsBasket3Fill />
+                  <Styled.Span visible={addProductCart.length > 0}>{addProductCart.length}</Styled.Span>
+                </p>
+              </Link>
+            </li>
 
             {user.token && (
               <li>

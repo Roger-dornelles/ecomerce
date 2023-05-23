@@ -9,6 +9,16 @@ export type ProductType = {
   userID: number;
   value: string;
   photosID: number[] | number;
+  disabled?: boolean;
+};
+
+export type ProductProps = {
+  name: string;
+  image: string;
+  quantity: number;
+  id: number;
+  availableQuantity?: number;
+  disabled?: boolean;
 };
 
 export type AddProductType = {
