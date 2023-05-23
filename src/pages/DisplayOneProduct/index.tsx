@@ -1,16 +1,34 @@
 import { useParams } from 'react-router-dom';
 import * as styled from './styled';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useContext } from 'react';
 import apiOneProduct from '../../api/displayOneProduct';
 import { Error, Button } from '../../globalCss';
 import { Pagination } from '../../components/Pagination';
 import { ProductType } from '../../types/product';
+import { AddCartContext, StateProps } from '../../context/addCartContext';
+import Cookies from 'js-cookie';
+
+type ProductArrayProps = {
+  name: string;
+  image: string;
+  quantity: number;
+  id: number;
+  availableQuantity: number;
+  disabled: boolean;
+};
+
+type ProductImageProps = {
+  id: number;
+  link: string;
+};
 
 const displayOneProduct = () => {
   const { id } = useParams();
+  const { addProductCart, setAddProductCart }: any = useContext(AddCartContext);
 
   const [product, setProduct] = useState<ProductType>();
-  const [productImage, setProductImage] = useState([]);
+  const [productImage, setProductImage] = useState<ProductImageProps[]>([]);
+  const [disabled, setDisabled] = useState<boolean>(false);
 
   const [error, setError] = useState<string>('');
 
@@ -46,6 +64,56 @@ const displayOneProduct = () => {
     setCurrentPage(value);
   };
 
+  const handleAddProductCart = (product: ProductType) => {
+    let productArray: ProductArrayProps[] = [...addProductCart];
+
+    let productExistsInArray = productArray.find((item) => item.name === product.name);
+
+    if (!productExistsInArray) {
+      productArray.push({
+        id: product.id,
+        name: product.name,
+        image: productImage[0].link,
+        quantity: 1,
+        availableQuantity: product.quantity,
+        disabled: false,
+      });
+
+      productArray.map((itemArray) => {
+        if (itemArray.quantity >= itemArray.availableQuantity) {
+          itemArray.disabled = true;
+        }
+
+        productArray.filter((productArray) => {
+          if (productArray.id === product.id) {
+            setDisabled(productArray.disabled);
+            console.log('console. ', productArray.disabled);
+          }
+        });
+      });
+    } else {
+      addProductCart.filter((item: { id: number; quantity: number; disabled: boolean; availableQuantity: number }) => {
+        if (item.id === product.id) {
+          item.quantity = item.quantity + 1;
+          item.disabled = item.quantity >= item.availableQuantity;
+        }
+      });
+    }
+
+    productArray.filter((productArray) => {
+      if (productArray.id === product.id) {
+        setDisabled(productArray.disabled);
+        console.log('console. ', productArray.disabled);
+      }
+    });
+
+    let arrayProductsJSON = JSON.stringify(productArray);
+    Cookies.set('list', arrayProductsJSON);
+    setAddProductCart(productArray);
+  };
+
+  console.log('addPoduct Cart ', addProductCart);
+
   return (
     <styled.Container>
       {error && <Error>{error}</Error>}
@@ -63,6 +131,7 @@ const displayOneProduct = () => {
 
       {product && (
         <styled.ProductContainer>
+          {disabled && <styled.Span>Não há mais Produto disponível</styled.Span>}
           <styled.Product>
             <styled.ProductName bold="bold">{product.name}</styled.ProductName>
           </styled.Product>
@@ -92,7 +161,9 @@ const displayOneProduct = () => {
           </styled.Product>
 
           <styled.ButtonContainer>
-            <Button>Comprar</Button>
+            <Button disabled={disabled} onClick={() => handleAddProductCart(product)}>
+              Comprar
+            </Button>
           </styled.ButtonContainer>
         </styled.ProductContainer>
       )}

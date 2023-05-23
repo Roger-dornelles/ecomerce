@@ -43,20 +43,25 @@ export const Success = styled.div`
   border-radius: 5px;
 `;
 
-export const Button = styled.button`
+interface ButtonType {
+  disabled?: boolean;
+}
+
+export const Button = styled.button<ButtonType>`
   outline: none;
   border: none;
   padding: 0.5rem 1.3rem;
   border-radius: 4px;
-  background-color: #03c988;
+  background-color: ${(props) => (props.disabled ? '#ccc' : '#03c988')};
   color: #fff;
   cursor: pointer;
   transition: ease-in-out 0.5s;
   margin-top: 1rem;
+  ${(props) => (props.disabled ? 'cursor: not-allowed;' : '')}
 
   &:hover {
     transition: ease-in-out 0.5s;
-    background-color: #03c999;
+    background-color: ${(props) => (props.disabled ? '#ccc' : '#03c999')};
     box-shadow: 2px 3px 7px #ccc;
   }
 `;
