@@ -103,3 +103,16 @@ export const ButtonContainer = styled.div`
     align-items: center;
   }
 `;
+
+export const Span = styled.span`
+  width: 80%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f48484;
+  color: #000;
+  margin-top: 1rem;
+  border-radius: 4px;
+  padding: 0.2rem 0;
+`;
