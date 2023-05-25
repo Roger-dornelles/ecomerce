@@ -53,10 +53,6 @@ export const LI = styled.li`
   border: 1px solid #ccc;
 `;
 
-type Props = {
-  width?: string;
-  height?: string;
-};
 export const Img = styled.img`
   width: ${(props) => (props.width ? props.width : '50px')};
   height: ${(props) => (props.height ? props.height : '50px')};
