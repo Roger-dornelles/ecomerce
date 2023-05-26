@@ -41,7 +41,11 @@ const confirmPurchase = () => {
   };
 
   const handleBehindTheCard = () => {
-    setBehindTheCard(!behindTheCard);
+    setBehindTheCard(true);
+  };
+
+  const handleFrontOfCard = () => {
+    setBehindTheCard(false);
   };
 
   return (
@@ -111,12 +115,16 @@ const confirmPurchase = () => {
               <styled.Img src={American_express} alt="Cartão American express" width={60} />
             </styled.ContainerCardName>
           </styled.ContainerCard>
-          <Card cardName={cardName} code={code} behindTheCard={behindTheCard} />
-          <input type="text" value={code} onChange={(e) => setCode(e.target.value)} />
+          <Card cardName={cardName} code={code} behindTheCard={behindTheCard} frontOfCard={!behindTheCard} />
 
-          <label onClick={handleBehindTheCard}>
-            <input />
-          </label>
+          <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
+            <label onClick={handleBehindTheCard}>
+              <input placeholder="atras" type="text" value={code} onChange={(e) => setCode(e.target.value)} />
+            </label>
+            <label onClick={handleFrontOfCard}>
+              <input placeholder="frente" />
+            </label>
+          </div>
         </styled.DivisionTwo>
       </styled.ContainerDivision>
     </styled.Container>

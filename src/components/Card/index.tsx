@@ -4,20 +4,27 @@ interface PropsCard {
   cardName: string;
   code: string;
   behindTheCard: boolean;
+  frontOfCard: boolean;
 }
 
-const Card = ({ cardName, code, behindTheCard }: PropsCard) => {
+const Card = ({ cardName, code, behindTheCard, frontOfCard }: PropsCard) => {
   return (
     <styled.Container>
       <h2>{cardName.toUpperCase()}</h2>
-      <styled.Card>
-        <styled.BehindTheCard behindTheCard={behindTheCard}>
+      <styled.BehindCard behindTheCard={behindTheCard}>
+        <styled.BehindTheCard>
           <styled.MagneticStripe />
           <styled.CodeCard>
-            <input placeholder="security code" value={code} />
+            <styled.Input placeholder="security code" value={code} disabled />
           </styled.CodeCard>
         </styled.BehindTheCard>
-      </styled.Card>
+      </styled.BehindCard>
+
+      <styled.FrontOfCard front={frontOfCard}>
+        <styled.FrontCard>
+          <styled.Input placeholder="name" value={code} disabled />
+        </styled.FrontCard>
+      </styled.FrontOfCard>
     </styled.Container>
   );
 };
