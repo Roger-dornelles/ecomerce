@@ -49,8 +49,6 @@ interface ButtonType {
 }
 
 export const Button = styled.button<ButtonType>`
-  width: ${(props) => (props.width ? props.width : '100%')};
-  margin: 0 auto;
   outline: none;
   border: none;
   padding: 0.5rem 1.3rem;

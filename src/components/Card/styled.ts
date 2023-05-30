@@ -1,7 +1,7 @@
 import styled from 'styled-components';
 
 interface PropsContainer {
-  isVisible?: string;
+  isVisible?: boolean;
 }
 
 export const Container = styled.div<PropsContainer>`
@@ -15,6 +15,10 @@ export const Container = styled.div<PropsContainer>`
   padding: 1rem;
   border-radius: 4px;
   margin: 0 auto;
+`;
+
+export const H2 = styled.h2`
+  color: #c3c2c1;
 `;
 
 export const CardContainer = styled.div`
@@ -61,14 +65,19 @@ export const CodeCard = styled.div`
   justify-content: flex-start;
   align-items: flex-end;
 `;
-export const Input = styled.input`
+
+interface PropsInput {
+  width?: string;
+}
+export const Input = styled.input<PropsInput>`
   border: 0;
   outline: none;
-  background-color: #cdc7be;
+  background-color: transparent;
   font-size: 10px;
-  margin-bottom: 1rem;
+  margin-bottom: 0.3rem;
   margin-left: 0.7rem;
   padding-left: 0.4rem;
+  width: ${(props) => props.width && props.width};
 `;
 
 interface FrontProps {
@@ -92,11 +101,25 @@ export const FrontCard = styled.div`
   width: 100%;
   height: 100%;
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
   align-items: flex-end;
 `;
 
-export const Img = styled.img`
-  width: 100px;
-  height: 100px;
+export const InfoCard = styled.div`
+  display: fle;
+  flex-direction: column;
+`;
+
+interface PropsImg {
+  width?: string;
+  marginLeft?: string;
+}
+export const Img = styled.img<PropsImg>`
+  width: ${(props) => (props.width ? props.width : '40px')};
+  height: 30px;
+  margin-left: ${(props) => props.marginLeft && props.marginLeft};
+  margin-right: 0.2rem;
+  margin-bottom: 0.2rem;
+  background-color: transparent;
+  border-radius: 4px;
 `;

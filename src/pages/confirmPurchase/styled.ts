@@ -120,11 +120,11 @@ export const ContainerInfoCard = styled.div<PropsInfoCard>`
   background-color: #eeeeee;
   margin-top: 1rem;
   border-radius: 8px;
-  padding: 1rem 0;
+  padding: 1rem;
   ${(props) =>
     props.isVisible
       ? 'display:flex; flex-direction:column; justify-content:center;  transition:2s; opacity:1;'
-      : 'display:block;opacity:0;transition:2s;'}
+      : 'opacity:0;transition:2s; display:block;'}
 `;
 
 export const ContainerLogradouro = styled.div`

@@ -62,7 +62,7 @@ const confirmPurchase = () => {
       <styled.ContainerDivision>
         <styled.DivisionOne>
           <styled.H2>Pedido</styled.H2>
-          {!products.length && <styled.H2>Opss, Não há registro de compras</styled.H2>}
+          {!products.length && <styled.H2>Opss, Não há compras</styled.H2>}
           <styled.UL>
             {products &&
               products.map((product: ProductProps) => {
@@ -126,7 +126,7 @@ const confirmPurchase = () => {
           </styled.ContainerCard>
 
           <Card
-            isVisible={cardName}
+            isVisible={cardName ? true : false}
             imageCard={imageCard}
             cardName={cardName}
             code={code}
@@ -135,19 +135,19 @@ const confirmPurchase = () => {
           />
 
           <styled.ContainerInfoCard isVisible={cardName}>
-            <Input label="Numero do cartão" placeholder="000 1111 2222 2222" />
-            <Input label="Data vencimento" placeholder="10/29" width={'120px'} />
-            <Input label="Nome completo" placeholder="John deere" />
-            <Input label="Celular" placeholder="(00) 9 9999-9999" width={'300px'} />
+            <Input label="Numero do cartão" placeholder="000 1111 2222 2222" onClick={handleFrontOfCard} />
+            <Input label="Data vencimento" placeholder="10/29" width={'120px'} onClick={handleFrontOfCard} />
+            <Input label="Nome completo" placeholder="John deere" onClick={handleFrontOfCard} />
+            <Input label="Celular" placeholder="(00) 9 9999-9999" width={'300px'} onClick={handleFrontOfCard} />
             <styled.ContainerLogradouro>
-              <Input label="Endereço" placeholder="Rua abc" width={'500px'} />
-              <Input label="Numero" placeholder="100" width="110px" />
+              <Input label="Endereço" placeholder="Rua abc" width={'500px'} onClick={handleFrontOfCard} />
+              <Input label="Numero" placeholder="100" width="110px" onClick={handleFrontOfCard} />
             </styled.ContainerLogradouro>
-            <Input label="Complemento" placeholder="apartamento 1101" />
+            <Input label="Complemento" placeholder="apartamento 1101" onClick={handleFrontOfCard} />
 
-            <Input label={'código de segurança'} placeholder={'001'} width="200px" />
+            <Input label={'código de segurança'} placeholder={'001'} width="30%" onClick={handleBehindTheCard} />
 
-            <Button disabled={false} width={'80%'}>
+            <Button disabled={true} width={'80%'}>
               Confirmar
             </Button>
           </styled.ContainerInfoCard>
