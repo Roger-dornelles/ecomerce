@@ -4,7 +4,7 @@ export const Container = styled.div`
   margin: 0 auto;
   margin-top: 2rem;
   width: 80%;
-  height: 100%;
+  /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
@@ -14,7 +14,6 @@ export const Container = styled.div`
 
 export const ContainerDivision = styled.div`
   width: 100%;
-  height: 100%;
   display: flex;
   flex-direction: row;
   justify-content: space-around;
@@ -53,7 +52,11 @@ export const LI = styled.li`
   border: 1px solid #ccc;
 `;
 
-export const Img = styled.img`
+interface PropsImage {
+  width?: string;
+}
+
+export const Img = styled.img<PropsImage>`
   width: ${(props) => (props.width ? props.width : '50px')};
   height: ${(props) => (props.height ? props.height : '50px')};
   border-radius: 4px;
@@ -105,4 +108,28 @@ export const ContainerCardName = styled.div`
 
 export const InputRadio = styled.input.attrs({ type: 'radio' })`
   margin: 0px 0.5rem;
+`;
+
+interface PropsInfoCard {
+  isVisible?: string;
+}
+
+export const ContainerInfoCard = styled.div<PropsInfoCard>`
+  width: 100%;
+  margin-bottom: 2rem;
+  background-color: #eeeeee;
+  margin-top: 1rem;
+  border-radius: 8px;
+  padding: 1rem 0;
+  ${(props) =>
+    props.isVisible
+      ? 'display:flex; flex-direction:column; justify-content:center;  transition:2s; opacity:1;'
+      : 'display:block;opacity:0;transition:2s;'}
+`;
+
+export const ContainerLogradouro = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  margin: 0 auto;
 `;

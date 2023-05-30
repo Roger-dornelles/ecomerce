@@ -9,12 +9,21 @@ import American_express from '../../assets/images/american_express.png';
 import Elo from '../../assets/images/elo.png';
 import Card from '../../components/Card';
 
+import Input from '../../components/Input';
+import { Button } from '../../globalCss';
+
 const confirmPurchase = () => {
   const { addProductCart }: any = useContext(AddCartContext);
   const [products] = useState<ProductProps[]>(addProductCart);
   const [cardName, setCardName] = useState<string>('');
   const [code, setCode] = useState('');
   const [behindTheCard, setBehindTheCard] = useState<boolean>(false);
+
+  const imageCard = [];
+  imageCard.push({ name: 'master card', url: Master });
+  imageCard.push({ name: 'elo', url: Elo });
+  imageCard.push({ name: 'visa', url: Visa });
+  imageCard.push({ name: 'american express', url: American_express });
 
   let currencyFormatted = '';
   let total = 0;
@@ -85,7 +94,7 @@ const confirmPurchase = () => {
                 value="master_card"
                 onChange={(value) => handleCardDataDisplay(value.target.defaultValue)}
               />
-              <styled.Img src={Master} alt="Cartão master" width={60} />
+              <styled.Img src={Master} alt="Cartão master" width={'60px'} />
             </styled.ContainerCardName>
 
             <styled.ContainerCardName>
@@ -94,7 +103,7 @@ const confirmPurchase = () => {
                 value="visa"
                 onChange={(value) => handleCardDataDisplay(value.target.defaultValue)}
               />
-              <styled.Img src={Visa} alt="Cartão Visa" width={60} />
+              <styled.Img src={Visa} alt="Cartão Visa" width={'60px'} />
             </styled.ContainerCardName>
 
             <styled.ContainerCardName>
@@ -103,7 +112,7 @@ const confirmPurchase = () => {
                 value="elo"
                 onChange={(value) => handleCardDataDisplay(value.target.defaultValue)}
               />
-              <styled.Img src={Elo} alt="Cartão elo" width={60} />
+              <styled.Img src={Elo} alt="Cartão elo" width={'60px'} />
             </styled.ContainerCardName>
 
             <styled.ContainerCardName>
@@ -112,19 +121,36 @@ const confirmPurchase = () => {
                 value="american_express"
                 onChange={(value) => handleCardDataDisplay(value.target.defaultValue)}
               />
-              <styled.Img src={American_express} alt="Cartão American express" width={60} />
+              <styled.Img src={American_express} alt="Cartão American express" width={'60px'} />
             </styled.ContainerCardName>
           </styled.ContainerCard>
-          <Card cardName={cardName} code={code} behindTheCard={behindTheCard} frontOfCard={!behindTheCard} />
 
-          <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
-            <label onClick={handleBehindTheCard}>
-              <input placeholder="atras" type="text" value={code} onChange={(e) => setCode(e.target.value)} />
-            </label>
-            <label onClick={handleFrontOfCard}>
-              <input placeholder="frente" />
-            </label>
-          </div>
+          <Card
+            isVisible={cardName}
+            imageCard={imageCard}
+            cardName={cardName}
+            code={code}
+            behindTheCard={behindTheCard}
+            frontOfCard={!behindTheCard}
+          />
+
+          <styled.ContainerInfoCard isVisible={cardName}>
+            <Input label="Numero do cartão" placeholder="000 1111 2222 2222" />
+            <Input label="Data vencimento" placeholder="10/29" width={'120px'} />
+            <Input label="Nome completo" placeholder="John deere" />
+            <Input label="Celular" placeholder="(00) 9 9999-9999" width={'300px'} />
+            <styled.ContainerLogradouro>
+              <Input label="Endereço" placeholder="Rua abc" width={'500px'} />
+              <Input label="Numero" placeholder="100" width="110px" />
+            </styled.ContainerLogradouro>
+            <Input label="Complemento" placeholder="apartamento 1101" />
+
+            <Input label={'código de segurança'} placeholder={'001'} width="200px" />
+
+            <Button disabled={false} width={'80%'}>
+              Confirmar
+            </Button>
+          </styled.ContainerInfoCard>
         </styled.DivisionTwo>
       </styled.ContainerDivision>
     </styled.Container>
