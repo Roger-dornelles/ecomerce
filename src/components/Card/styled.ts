@@ -16,7 +16,7 @@ export const Container = styled.div<PropsContainer>`
   border-radius: 4px;
   margin: 0 auto;
 
-  @media (max-width: 450px) {
+  @media (max-width: 540px) {
     display: none;
   }
 `;
