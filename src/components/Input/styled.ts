@@ -2,11 +2,7 @@ import styled from 'styled-components';
 
 export const ContainerInfoCard = styled.form`
   width: 100%;
-`;
-
-export const InfoCardFront = styled.div`
-  width: 100%;
-  padding: 0.5rem;
+  padding: 0.7rem 0.5rem;
   display: flex;
   flex-direction: column;
 `;
@@ -17,6 +13,7 @@ export const Label = styled.label`
 
 interface PropsInput {
   width?: string;
+  error?: boolean;
 }
 export const Input = styled.input<PropsInput>`
   width: ${(props) => (props.width ? props.width : '100%')};
@@ -32,5 +29,10 @@ export const Input = styled.input<PropsInput>`
 
   &:focus {
     border: 1px solid #ccc;
+    ${(props) => props.error && 'border:1px solid  #f99b7d'};
+  }
+
+  @media (max-width: 1280px) {
+    width: 100%;
   }
 `;

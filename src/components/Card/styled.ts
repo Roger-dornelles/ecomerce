@@ -15,6 +15,10 @@ export const Container = styled.div<PropsContainer>`
   padding: 1rem;
   border-radius: 4px;
   margin: 0 auto;
+
+  @media (max-width: 450px) {
+    display: none;
+  }
 `;
 
 export const H2 = styled.h2`
@@ -36,7 +40,7 @@ export const BehindCard = styled.div<PropsBehindTheCard>`
   ${(props) =>
     props.behindTheCard
       ? 'display: flex;  transition: 2s; opacity: 1; transform: translateX(200px);'
-      : ' transition: 2s; opacity: 0;display: flex; transform: translateX(-0px);'}
+      : ' transition: 2s; opacity: 0;display: flex; transform: translateX(-20px);'}
   width: 40%;
   height: 10rem;
   border-radius: 4px;
@@ -44,6 +48,14 @@ export const BehindCard = styled.div<PropsBehindTheCard>`
   background-image: linear-gradient(to bottom right, #b2b2b2, #cdc7be);
   margin-top: 1rem;
   border-radius: 8px;
+
+  @media (max-width: 820px) {
+    width: 40%;
+    ${(props) =>
+      props.behindTheCard
+        ? 'display: flex;  transition: 2s; opacity: 1; transform: translateX(210px);'
+        : ' transition: 2s; opacity: 0;display: flex; transform: translateX(-50px);'}
+  }
 `;
 
 export const MagneticStripe = styled.div`
@@ -78,6 +90,10 @@ export const Input = styled.input<PropsInput>`
   margin-left: 0.7rem;
   padding-left: 0.4rem;
   width: ${(props) => props.width && props.width};
+
+  @media (max-width: 820px) {
+    font-size: 14px;
+  }
 `;
 
 interface FrontProps {
@@ -86,7 +102,7 @@ interface FrontProps {
 export const FrontOfCard = styled.div<FrontProps>`
   ${(props) =>
     props.front
-      ? 'display: flex; transition: 2s; opacity: 1; transform: translateX(-60px); z-index:9999;'
+      ? 'display: flex; transition: 2s; opacity: 1; transform: translateX(-80px); z-index:9999;'
       : 'transition: 2s; opacity: 0; transform: translateX(100px); display: flex;'}
   width: 40%;
   height: 10rem;
@@ -95,6 +111,14 @@ export const FrontOfCard = styled.div<FrontProps>`
   background-image: linear-gradient(to bottom right, #b2b2b2, #cdc7be);
   margin-top: 1rem;
   border-radius: 8px;
+
+  @media (max-width: 820px) {
+    width: 40%;
+    ${(props) =>
+      props.front
+        ? 'display: flex; transition: 2s; opacity: 1; transform: translateX(-80px); z-index:9999;'
+        : 'transition: 2s; opacity: 0; transform: translateX(100px); display: flex;'}
+  }
 `;
 
 export const FrontCard = styled.div`
@@ -106,8 +130,9 @@ export const FrontCard = styled.div`
 `;
 
 export const InfoCard = styled.div`
-  display: fle;
-  flex-direction: column;
+  @media (max-width: 820px) {
+    font-size: 19px;
+  }
 `;
 
 interface PropsImg {

@@ -4,12 +4,22 @@ export const Container = styled.div`
   margin: 0 auto;
   margin-top: 2rem;
   width: 80%;
-  /* height: 100%; */
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: #000;
+
+  @media (max-width: 1280px) {
+    width: 100%;
+    margin-top: 2rem;
+  }
+
+  /* @media (max-width: 300px) {
+    width: 100%;
+    margin: 0 auto;
+    margin-top: 2rem;
+  } */
 `;
 
 export const ContainerDivision = styled.div`
@@ -18,6 +28,15 @@ export const ContainerDivision = styled.div`
   flex-direction: row;
   justify-content: space-around;
   margin-top: 2rem;
+  margin-bottom: 2rem;
+
+  @media (max-width: 920px) {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
 `;
 
 export const DivisionOne = styled.div`
@@ -25,6 +44,11 @@ export const DivisionOne = styled.div`
   border-radius: 4px;
   padding: 1rem;
   border: 1px solid #f6f1f1;
+
+  @media (max-width: 920px) {
+    width: 95%;
+    margin: 0 auto;
+  }
 `;
 
 export const H2 = styled.h2`
@@ -80,6 +104,12 @@ export const DivisionTwo = styled.div`
   border-radius: 4px;
   padding: 1rem;
   border: 1px solid #f6f1f1;
+
+  @media (max-width: 920px) {
+    width: 95%;
+    margin: 0 auto;
+    margin-top: 1.5rem;
+  }
 `;
 
 export const Paragraph = styled.p`
@@ -97,6 +127,12 @@ export const ContainerCard = styled.div`
   margin: 0.5rem 0px;
   border-radius: 4px;
   padding: 1rem 0;
+
+  @media (max-width: 820px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+  }
 `;
 
 export const ContainerCardName = styled.div`
@@ -104,6 +140,13 @@ export const ContainerCardName = styled.div`
   align-items: center;
   justify-content: flex-start;
   border-radius: 4px;
+
+  @media (max-width: 820px) {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    margin: 1rem 0;
+  }
 `;
 
 export const InputRadio = styled.input.attrs({ type: 'radio' })`
@@ -132,4 +175,17 @@ export const ContainerLogradouro = styled.div`
   display: flex;
   flex-direction: row;
   margin: 0 auto;
+
+  @media (max-width: 1280px) {
+    display: flex;
+    flex-direction: column;
+  }
+`;
+
+export const Error = styled.span`
+  position: absolute;
+  margin-top: -120px;
+  margin-left: 10px;
+  color: #f99b7d;
+  font-size: 12px;
 `;

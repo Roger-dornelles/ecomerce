@@ -1,5 +1,6 @@
 import * as styled from './styled';
-import { useContext, useState } from 'react';
+import { useEffect } from 'react';
+import { SetStateAction, useContext, useState } from 'react';
 import { AddCartContext } from '../../context/addCartContext';
 import { ProductProps } from '../../types/product';
 
@@ -16,8 +17,19 @@ const confirmPurchase = () => {
   const { addProductCart }: any = useContext(AddCartContext);
   const [products] = useState<ProductProps[]>(addProductCart);
   const [cardName, setCardName] = useState<string>('');
-  const [code, setCode] = useState('');
   const [behindTheCard, setBehindTheCard] = useState<boolean>(false);
+
+  const [errorName, setErrorName] = useState<string>('');
+  const [disabledButtonPayment, setDisabledButtonPayment] = useState<boolean>(true);
+
+  const [numberCard, setNumberCard] = useState<string>('');
+  const [dueDate, setDueDate] = useState<string>('');
+  const [name, setName] = useState<string>('');
+  const [phone, setPhone] = useState<string>('');
+  const [address, setAddress] = useState<string>('');
+  const [numberAddress, setNumberAddress] = useState<string>('');
+  const [complement, setComplement] = useState<string>('');
+  const [codeSecurity, setCodeSecurity] = useState<string>('');
 
   const imageCard = [];
   imageCard.push({ name: 'master card', url: Master });
@@ -55,6 +67,61 @@ const confirmPurchase = () => {
 
   const handleFrontOfCard = () => {
     setBehindTheCard(false);
+  };
+
+  const phoneMask = (value: string) => {
+    if (!value) return '';
+    value = value.replace(/\D/g, '');
+    value = value.replace(/(\d{2})(\d)/, '($1) $2');
+    value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+    return value;
+  };
+
+  const cardMask = (value: string) => {
+    value = value.replace(/\D/g, '');
+    value = value.replace(/(\d{4})/g, '$1 ');
+    value = value.replace(/\.$/, '');
+    value = value.substring(0, 19);
+
+    return value;
+  };
+
+  const ValidateName = (name: string) => {
+    let regex = /^[A-zÀ-ú '´]+$/;
+
+    let isValid = name.match(regex);
+    if (isValid == null) {
+      setErrorName('Nome deve conter somente caracteres');
+
+      return false;
+    } else {
+      setErrorName('');
+      return true;
+    }
+  };
+
+  const formattedDate = (date: string) => {
+    date = date.replace(/\D/g, '');
+    date = date.replace(/(\d{2})(\d)/, '$1/$2');
+    date = date.replace(/(\d)(\d{2})/, '$1/$2');
+    return date;
+  };
+
+  const validatedSecurityCode = (code: string) => {
+    code = code.replace(/\D/g, '');
+    return code;
+  };
+
+  useEffect(() => {
+    if (codeSecurity.length >= 2) {
+      setDisabledButtonPayment(false);
+    } else {
+      setDisabledButtonPayment(true);
+    }
+  }, [codeSecurity]);
+
+  const handleConfirmPayment = () => {
+    alert('clicou');
   };
 
   return (
@@ -129,27 +196,103 @@ const confirmPurchase = () => {
             isVisible={cardName ? true : false}
             imageCard={imageCard}
             cardName={cardName}
-            code={code}
+            numberCard={numberCard}
+            dueDate={dueDate}
+            name={name}
+            codeSecurity={codeSecurity}
             behindTheCard={behindTheCard}
             frontOfCard={!behindTheCard}
           />
 
           <styled.ContainerInfoCard isVisible={cardName}>
-            <Input label="Numero do cartão" placeholder="000 1111 2222 2222" onClick={handleFrontOfCard} />
-            <Input label="Data vencimento" placeholder="10/29" width={'120px'} onClick={handleFrontOfCard} />
-            <Input label="Nome completo" placeholder="John deere" onClick={handleFrontOfCard} />
-            <Input label="Celular" placeholder="(00) 9 9999-9999" width={'300px'} onClick={handleFrontOfCard} />
+            <Input
+              type="text"
+              label="Numero do cartão"
+              placeholder="000 1111 2222 3333"
+              pattern="[0-9]"
+              value={numberCard}
+              onChange={(e) => setNumberCard(cardMask(e.target.value as string))}
+              onClick={handleFrontOfCard}
+            />
+            <Input
+              type="text"
+              label="Data vencimento"
+              placeholder="10/29"
+              value={dueDate}
+              maxlength="5"
+              onChange={(e) => setDueDate(formattedDate(e.target.value as string))}
+              width={'120px'}
+              onClick={handleFrontOfCard}
+            />
+            <Input
+              type="text"
+              error={errorName ? true : false}
+              label="Nome completo"
+              placeholder="John deere"
+              value={name}
+              onChange={(e) => {
+                setName(e.target.value);
+                ValidateName(e.target.value as string);
+              }}
+              onClick={handleFrontOfCard}
+            />
+            {errorName && <styled.Error>{errorName}</styled.Error>}
+            <Input
+              type="tel"
+              label="Celular"
+              placeholder="(00) 9 9999-9999"
+              maxlength="15"
+              value={phone}
+              onChange={(e) => setPhone(phoneMask(e.target.value as string))}
+              width={'300px'}
+              onClick={handleFrontOfCard}
+            />
             <styled.ContainerLogradouro>
-              <Input label="Endereço" placeholder="Rua abc" width={'500px'} onClick={handleFrontOfCard} />
-              <Input label="Numero" placeholder="100" width="110px" onClick={handleFrontOfCard} />
+              <Input
+                type="text"
+                label="Endereço"
+                placeholder="Rua abc"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
+                width={'500px'}
+                onClick={handleFrontOfCard}
+              />
+              <Input
+                type="text"
+                label="Numero"
+                placeholder="100"
+                value={numberAddress}
+                onChange={(e) => setNumberAddress(e.target.value)}
+                width="110px"
+                onClick={handleFrontOfCard}
+              />
             </styled.ContainerLogradouro>
-            <Input label="Complemento" placeholder="apartamento 1101" onClick={handleFrontOfCard} />
+            <Input
+              type="text"
+              label="Complemento"
+              placeholder="apartamento 1101"
+              value={complement}
+              onChange={(e) => setComplement(e.target.value)}
+              onClick={handleFrontOfCard}
+            />
 
-            <Input label={'código de segurança'} placeholder={'001'} width="30%" onClick={handleBehindTheCard} />
+            <Input
+              type="text"
+              label={'código de segurança'}
+              placeholder={'001'}
+              pattern="[0-9]"
+              maxlength="3"
+              value={codeSecurity}
+              onChange={(e) => setCodeSecurity(validatedSecurityCode(e.target.value as string))}
+              width="30%"
+              onClick={handleBehindTheCard}
+            />
 
-            <Button disabled={true} width={'80%'}>
-              Confirmar
-            </Button>
+            <div onClick={handleConfirmPayment}>
+              <Button disabled={disabledButtonPayment} width={'80%'}>
+                Confirmar pagamento
+              </Button>
+            </div>
           </styled.ContainerInfoCard>
         </styled.DivisionTwo>
       </styled.ContainerDivision>

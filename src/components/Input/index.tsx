@@ -1,3 +1,4 @@
+import { SetStateAction } from 'react';
 import * as styled from './styled';
 
 interface PropsInput {
@@ -6,15 +7,41 @@ interface PropsInput {
   width?: string;
   pattern?: any;
   onClick?: () => void;
+  value?: string;
+  onChange?: (e: { target: { value: SetStateAction<string> } }) => void;
+  type: 'text' | 'number' | 'tel' | 'email' | 'date';
+  maxlength?: string;
+  error?: boolean;
 }
 
-const Input = ({ label, placeholder, width, pattern, onClick }: PropsInput) => {
+const Input = ({
+  label,
+  placeholder,
+  width,
+  pattern,
+  onClick,
+  onChange,
+  value,
+  type,
+  maxlength,
+  error,
+  ...props
+}: PropsInput) => {
   return (
     <styled.ContainerInfoCard>
-      <styled.InfoCardFront>
-        <styled.Label>{label}</styled.Label>
-        <styled.Input placeholder={placeholder} width={width} pattern={pattern} onClick={onClick} />
-      </styled.InfoCardFront>
+      <styled.Label>{label}</styled.Label>
+      <styled.Input
+        {...props}
+        type={type}
+        placeholder={placeholder}
+        width={width}
+        pattern={pattern}
+        value={value}
+        onChange={onChange}
+        onClick={onClick}
+        maxLength={maxlength}
+        error={error}
+      />
     </styled.ContainerInfoCard>
   );
 };
