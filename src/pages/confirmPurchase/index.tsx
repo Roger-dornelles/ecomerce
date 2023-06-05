@@ -4,6 +4,8 @@ import { SetStateAction, useContext, useState } from 'react';
 import { AddCartContext } from '../../context/addCartContext';
 import { ProductProps } from '../../types/product';
 
+import apiInstallment from '../../api/installmentsList';
+
 import Master from '../../assets/images/masterCard.png';
 import Visa from '../../assets/images/visa.png';
 import American_express from '../../assets/images/american_express.png';
@@ -12,6 +14,7 @@ import Card from '../../components/Card';
 
 import Input from '../../components/Input';
 import { Button } from '../../globalCss';
+import Select from '../../components/Select';
 
 const confirmPurchase = () => {
   const { addProductCart }: any = useContext(AddCartContext);
@@ -30,6 +33,21 @@ const confirmPurchase = () => {
   const [numberAddress, setNumberAddress] = useState<string>('');
   const [complement, setComplement] = useState<string>('');
   const [codeSecurity, setCodeSecurity] = useState<string>('');
+  const [numberOfInstallments, setNumberOfInstallments] = useState([]);
+  const [numberOfParcelsAndValue, setNumberOfParcelsAndValue] = useState<{ parcel: string; value: string }>({
+    value: '',
+    parcel: '',
+  });
+
+  useEffect(() => {
+    const installmentsList = async () => {
+      const result = await apiInstallment.installmentList(currencyFormatted as string);
+      if (result.data) {
+        setNumberOfInstallments(result.data);
+      }
+    };
+    installmentsList();
+  }, [cardName]);
 
   const imageCard = [];
   imageCard.push({ name: 'master card', url: Master });
@@ -91,7 +109,7 @@ const confirmPurchase = () => {
 
     let isValid = name.match(regex);
     if (isValid == null) {
-      setErrorName('Nome deve conter somente caracteres');
+      setErrorName('Nome deve conter somente letras');
 
       return false;
     } else {
@@ -113,15 +131,28 @@ const confirmPurchase = () => {
   };
 
   useEffect(() => {
-    if (codeSecurity.length >= 2) {
-      setDisabledButtonPayment(false);
+    if (name && address && numberAddress && numberCard && complement && dueDate && phone && numberOfParcelsAndValue) {
+      if (codeSecurity.length >= 3) {
+        setDisabledButtonPayment(false);
+      } else {
+        setDisabledButtonPayment(true);
+      }
     } else {
       setDisabledButtonPayment(true);
     }
-  }, [codeSecurity]);
+  }, [codeSecurity, name, address, numberAddress, numberCard, complement, dueDate, phone, numberOfParcelsAndValue]);
+
+  const getInstallmentValue = (value: string) => {
+    numberOfInstallments.filter((itemArray: { parcel: string; value: string }) => {
+      if (itemArray.parcel == value) {
+        setNumberOfParcelsAndValue({ value: itemArray.value, parcel: itemArray.parcel });
+        return;
+      }
+    });
+  };
 
   const handleConfirmPayment = () => {
-    alert('clicou');
+    console.log('NumberOfParcelsAndValue ', numberOfParcelsAndValue);
   };
 
   return (
@@ -205,6 +236,11 @@ const confirmPurchase = () => {
           />
 
           <styled.ContainerInfoCard isVisible={cardName}>
+            <Select
+              label="Numero de parcelas"
+              numberOfInstallments={numberOfInstallments}
+              getInstallmentValue={getInstallmentValue}
+            />
             <Input
               type="text"
               label="Numero do cartão"
@@ -288,8 +324,8 @@ const confirmPurchase = () => {
               onClick={handleBehindTheCard}
             />
 
-            <div onClick={handleConfirmPayment}>
-              <Button disabled={disabledButtonPayment} width={'80%'}>
+            <div>
+              <Button disabled={disabledButtonPayment} width={'80%'} onClick={handleConfirmPayment}>
                 Confirmar pagamento
               </Button>
             </div>

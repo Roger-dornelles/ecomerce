@@ -184,7 +184,7 @@ export const ContainerLogradouro = styled.div`
 
 export const Error = styled.span`
   position: absolute;
-  margin-top: -120px;
+  margin-top: -60px;
   margin-left: 10px;
   color: #f99b7d;
   font-size: 12px;
