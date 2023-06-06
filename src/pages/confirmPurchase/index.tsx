@@ -131,7 +131,7 @@ const confirmPurchase = () => {
   };
 
   useEffect(() => {
-    if (name && address && numberAddress && numberCard && complement && dueDate && phone && numberOfParcelsAndValue) {
+    if (name.length >= 2 && address && numberAddress && numberCard && complement && dueDate && phone && numberOfParcelsAndValue) {
       if (codeSecurity.length >= 3) {
         setDisabledButtonPayment(false);
       } else {
