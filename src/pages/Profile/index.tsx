@@ -9,9 +9,7 @@ import { Link } from 'react-router-dom';
 import { Error, Warning, Success } from '../../globalCss';
 import { BsPencilSquare } from 'react-icons/bs';
 import apiUpdateUser from '../../api/updateUser';
-import Cookies from 'js-cookie';
-import JwtVerify from '../../Jwt/index';
-import { JwtPayload } from 'jwt-decode';
+
 
 type StatesType = {
   id: number;
@@ -192,7 +190,7 @@ const Profile = () => {
       }
 
       const result = await apiUpdateUser.updateUser({ id: user.id, userData });
-      console.log('result front ', result);
+
 
       if (result.error) {
         setError(result.message);
@@ -221,7 +219,7 @@ const Profile = () => {
         {error && <Error>{error}</Error>}
         {warning && <Warning>{warning}</Warning>}
         {success && <Success>{success}</Success>}
-        <h2>Cadastro do usuário</h2>
+        <h2>Informações do usuário</h2>
         <label>
           Nome:
           <div>

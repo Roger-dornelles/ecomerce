@@ -19,10 +19,10 @@ export type ProductProps = {
   id: number;
   availableQuantity?: number;
   disabled?: boolean;
+  value: string;
 };
 
 export type AddProductType = {
   id: number;
-
   form: any;
 };

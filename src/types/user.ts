@@ -10,4 +10,15 @@ export type UserType = {
   state: string;
   createdAt?: string;
   updatedAt?: string;
+  district: string;
 };
+
+export interface NewAddressType {
+  name: string;
+  contact: string;
+  district: string;
+  logradouro: string;
+  number: string;
+  phone: string;
+  state: string;
+}
