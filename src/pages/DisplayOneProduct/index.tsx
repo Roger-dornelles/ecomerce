@@ -15,6 +15,7 @@ type ProductArrayProps = {
   id: number;
   availableQuantity: number;
   disabled: boolean;
+  value: string;
 };
 
 type ProductImageProps = {
@@ -84,6 +85,7 @@ const displayOneProduct = () => {
         quantity: 1,
         availableQuantity: product.quantity,
         disabled: false,
+        value: product.value,
       });
 
       productArray.map((itemArray) => {

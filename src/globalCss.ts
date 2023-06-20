@@ -45,6 +45,7 @@ export const Success = styled.div`
 
 interface ButtonType {
   disabled?: boolean;
+  width?: string;
 }
 
 export const Button = styled.button<ButtonType>`

@@ -57,6 +57,10 @@ export const Header = styled.header<Props>`
         }
       }
     }
+
+    @media (max-width: 540px) {
+      display: none;
+    }
   }
 `;
 

@@ -1,9 +1,11 @@
-import { useContext, useEffect, useLayoutEffect, useState } from 'react';
+import { useContext, useState } from 'react';
 import * as styled from './styled';
 import { BsPlusLg, BsDashLg } from 'react-icons/bs';
 import { AddCartContext } from '../../context/addCartContext';
 import { ProductProps } from '../../types/product';
-import Cookies from 'js-cookie';
+import { useNavigate } from 'react-router-dom';
+
+import { Button } from '../../globalCss';
 
 type ProductArrayProps = {
   item: {
@@ -18,11 +20,12 @@ type ProductArrayProps = {
 const productCart = () => {
   const { addProductCart, setAddProductCart }: any = useContext(AddCartContext);
 
+  const navigate = useNavigate();
+
   const [productList, setProductList] = useState<ProductProps[]>(addProductCart);
   const [quantityProduct, setQuantityProduct] = useState<any>([]);
- 
-  const handleButtonMinus = (item: ProductProps) => {
 
+  const handleButtonMinus = (item: ProductProps) => {
     let productInArray: Number = 0;
     productList.filter((itemArray) => {
       if (itemArray.id === item.id) {
@@ -64,6 +67,10 @@ const productCart = () => {
     }
   };
 
+  const handleConfirmPurchase = () => {
+    navigate('/pagamento');
+  };
+
   return (
     <styled.Container>
       {productList.length !== 0 && <h2>Carrinho de compras.</h2>}
@@ -99,6 +106,8 @@ const productCart = () => {
             })}
         </styled.UL>
       </styled.ListContainer>
+
+      {productList.length != 0 && <Button onClick={handleConfirmPurchase}>Finalizar pedido</Button>}
     </styled.Container>
   );
 };

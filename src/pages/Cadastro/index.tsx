@@ -5,11 +5,13 @@ import api from '../../api/states';
 import apiCreate from '../../api/createUser';
 import { Error, Warning, Success } from '../../globalCss';
 
+import { StatesType } from '../../types/state';
+
 export const Cadastro = () => {
   let [cpf, setCpf] = useState<string>('');
   const [name, setName] = useState<string>('');
   const [contact, setContact] = useState<string>('');
-  const [states, setStates] = useState<string[]>([]);
+  const [states, setStates] = useState<StatesType[]>([]);
   const [password, setPassword] = useState<string>('');
   const [email, setEmail] = useState<string>('');
   const [logradouro, setLogradouro] = useState<string>('');
@@ -105,7 +107,9 @@ export const Cadastro = () => {
         const regex = /^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{9,}$/;
 
         if (!regex.test(password)) {
-          setWarning('Senha deve ser maior de 9 caracteres, deve conter letra maiúscula, minúscula e carácter especial');
+          setWarning(
+            'Senha deve ser maior de 9 caracteres, deve conter letra maiúscula, minúscula e carácter especial'
+          );
           setTimeout(() => {
             setWarning('');
           }, 2250);
@@ -248,7 +252,7 @@ export const Cadastro = () => {
           <select onChange={(e) => setUserState(e.target.value)}>
             <option value={''}> </option>
             {states &&
-              states.map((state: any) => {
+              states.map((state) => {
                 return (
                   <option key={state.id} value={state.name}>
                     {state.name}
