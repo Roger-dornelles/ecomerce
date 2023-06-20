@@ -12,6 +12,7 @@ interface PropsInput {
   type: 'text' | 'number' | 'tel' | 'email' | 'date';
   maxlength?: string;
   error?: boolean;
+  disabled?: boolean;
 }
 
 const Input = ({
@@ -25,6 +26,7 @@ const Input = ({
   type,
   maxlength,
   error,
+  disabled,
   ...props
 }: PropsInput) => {
   return (
@@ -41,6 +43,7 @@ const Input = ({
         onClick={onClick}
         maxLength={maxlength}
         error={error}
+        disabled={disabled}
       />
     </styled.ContainerInfoCard>
   );

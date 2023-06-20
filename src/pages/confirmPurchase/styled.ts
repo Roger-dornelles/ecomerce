@@ -14,12 +14,6 @@ export const Container = styled.div`
     width: 100%;
     margin-top: 2rem;
   }
-
-  /* @media (max-width: 300px) {
-    width: 100%;
-    margin: 0 auto;
-    margin-top: 2rem;
-  } */
 `;
 
 export const ContainerDivision = styled.div`
@@ -97,6 +91,72 @@ export const TotalContainer = styled.div`
   align-items: center;
   color: #c3c2c1;
   font-weight: bold;
+  border-bottom: 1px solid #ccc;
+  padding: 1rem 0;
+`;
+
+interface InfoUserType {
+  user?: boolean;
+  newAddress?: boolean;
+}
+export const InfoUser = styled.div<InfoUserType>`
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  ${(props) => (props.user ? 'background-color: #f8f6f4;' : 'background-color:white;')}
+  padding: 1rem;
+`;
+
+export const InfoNewAddress = styled.div<InfoUserType>`
+  width: 100%;
+  flex-direction: row;
+  align-items: center;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  ${(props) =>
+    props.newAddress
+      ? 'transition:1s; display:flex;background-color: #f8f6f4;'
+      : 'opacity:0; transition:1s; display:flex;'}
+  padding: 1rem;
+`;
+
+export const ParagraphNewAddress = styled.p`
+  display: flex;
+`;
+export const UserInfoDescription = styled.div`
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  align-items: flex-start;
+  margin-left: 1rem;
+`;
+
+export const Label = styled.label`
+  width: 70%;
+  display: flex;
+  flex-direction: column;
+
+  select {
+    border: 1px solid #eeeeee;
+    padding: 0.3rem 0;
+    border-radius: 4px;
+    outline: none;
+
+    cursor: pointer;
+    &:focus {
+      border: 1px solid #ccc;
+    }
+  }
+`;
+
+export const NewAddressUser = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  margin-top: 2rem;
 `;
 
 export const DivisionTwo = styled.div`
@@ -112,52 +172,12 @@ export const DivisionTwo = styled.div`
   }
 `;
 
-export const Paragraph = styled.p`
-  display: flex;
-  justify-content: center;
-  align-items: center;
-`;
-
-export const ContainerCard = styled.div`
-  width: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: space-around;
-  background-color: #f8f6f4;
-  margin: 0.5rem 0px;
-  border-radius: 4px;
-  padding: 1rem 0;
-
-  @media (max-width: 820px) {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-  }
-`;
-
-export const ContainerCardName = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-  border-radius: 4px;
-
-  @media (max-width: 820px) {
-    display: flex;
-    justify-content: center;
-    flex-direction: row;
-    margin: 1rem 0;
-  }
-`;
-
-export const InputRadio = styled.input.attrs({ type: 'radio' })`
-  margin: 0px 0.5rem;
-`;
-
 interface PropsInfoCard {
   isVisible?: string;
 }
 
 export const ContainerInfoCard = styled.div<PropsInfoCard>`
+  position: relative;
   width: 100%;
   margin-bottom: 2rem;
   background-color: #eeeeee;
@@ -166,7 +186,7 @@ export const ContainerInfoCard = styled.div<PropsInfoCard>`
   padding: 1rem;
   ${(props) =>
     props.isVisible
-      ? 'display:flex; flex-direction:column; justify-content:center;  transition:2s; opacity:1;'
+      ? 'display:flex; flex-direction:column; justify-content:center; align-items:center;  transition:2s; opacity:1;'
       : 'opacity:0;transition:2s; display:block;'}
 `;
 

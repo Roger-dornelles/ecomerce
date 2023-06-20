@@ -4,14 +4,14 @@ import Chip from '../../assets/images/chip.jpg';
 interface ImageCard {
   name: string;
   url: string;
-  filter: (arg: unknown) => unknown;
+  // filter: (arg: unknown) => unknown;
 }
 
 interface PropsCard {
   cardName: string;
   behindTheCard: boolean;
   frontOfCard: boolean;
-  imageCard?: ImageCard;
+  imageCard?: ImageCard[];
   isVisible?: boolean;
   numberCard?: string;
   name?: string;

@@ -1,29 +1,57 @@
+import { useContext, useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import * as styled from './styled';
-import { useEffect } from 'react';
-import { SetStateAction, useContext, useState } from 'react';
+import { Button, Error, Success, Warning } from '../../globalCss';
+
 import { AddCartContext } from '../../context/addCartContext';
+import { UserContext } from '../../context/userContext';
+
 import { ProductProps } from '../../types/product';
+import { NewAddressType } from '../../types/user';
 
 import apiInstallment from '../../api/installmentsList';
+import apiMakeThePaymentService from '../../api/makeThePayment';
+import apiStates from '../../api/states';
 
 import Master from '../../assets/images/masterCard.png';
 import Visa from '../../assets/images/visa.png';
 import American_express from '../../assets/images/american_express.png';
 import Elo from '../../assets/images/elo.png';
-import Card from '../../components/Card';
 
+import Card from '../../components/Card';
 import Input from '../../components/Input';
-import { Button } from '../../globalCss';
 import Select from '../../components/Select';
+import TypeCard from '../../components/TypeCard';
+import Address from '../../components/Address';
+
+import PhoneMask from '../../hooks/usePhoneMask';
+import CardMask from '../../hooks/useCardMask';
+import FormattedDate from '../../hooks/useFormattedDate';
+
+interface UserProductDataOfPurchaseType {
+  name: string;
+  image: string;
+  quantity: string | number;
+  value: string;
+}
 
 const confirmPurchase = () => {
-  const { addProductCart }: any = useContext(AddCartContext);
+  const { user } = useContext(UserContext);
+  const navigate = useNavigate();
+
+  const { addProductCart, setAddProductCart }: any = useContext(AddCartContext);
   const [products] = useState<ProductProps[]>(addProductCart);
   const [cardName, setCardName] = useState<string>('');
   const [behindTheCard, setBehindTheCard] = useState<boolean>(false);
 
   const [errorName, setErrorName] = useState<string>('');
   const [disabledButtonPayment, setDisabledButtonPayment] = useState<boolean>(true);
+
+  const [error, setError] = useState<string>('');
+  const [success, setSuccess] = useState<string>('');
+  const [warning, setWarning] = useState<string>('');
+
+  const [addressUser, setAddressUser] = useState<NewAddressType>();
 
   const [numberCard, setNumberCard] = useState<string>('');
   const [dueDate, setDueDate] = useState<string>('');
@@ -38,6 +66,9 @@ const confirmPurchase = () => {
     value: '',
     parcel: '',
   });
+
+  const maxLengthSecurityCode = cardName === 'american express' ? '4' : '3';
+  const placeHolder = cardName === 'american express' ? '0000 111111 22222' : '000 1111 2222 3333';
 
   useEffect(() => {
     const installmentsList = async () => {
@@ -68,14 +99,11 @@ const confirmPurchase = () => {
     currencyFormatted = total.toLocaleString('pt-br', { style: 'currency', currency: 'BRL' });
   }
 
-  const handleCardDataDisplay = (card: string) => {
-    if (card === 'american_express') {
-      card = 'american express';
-    }
+  const handleSelectAddress = (value: NewAddressType) => {
+    setAddressUser(value);
+  };
 
-    if (card === 'master_card') {
-      card = 'master card';
-    }
+  const handleCardDataDisplay = (card: string) => {
     setCardName(card);
   };
 
@@ -85,23 +113,6 @@ const confirmPurchase = () => {
 
   const handleFrontOfCard = () => {
     setBehindTheCard(false);
-  };
-
-  const phoneMask = (value: string) => {
-    if (!value) return '';
-    value = value.replace(/\D/g, '');
-    value = value.replace(/(\d{2})(\d)/, '($1) $2');
-    value = value.replace(/(\d)(\d{4})$/, '$1-$2');
-    return value;
-  };
-
-  const cardMask = (value: string) => {
-    value = value.replace(/\D/g, '');
-    value = value.replace(/(\d{4})/g, '$1 ');
-    value = value.replace(/\.$/, '');
-    value = value.substring(0, 19);
-
-    return value;
   };
 
   const ValidateName = (name: string) => {
@@ -118,20 +129,22 @@ const confirmPurchase = () => {
     }
   };
 
-  const formattedDate = (date: string) => {
-    date = date.replace(/\D/g, '');
-    date = date.replace(/(\d{2})(\d)/, '$1/$2');
-    date = date.replace(/(\d)(\d{2})/, '$1/$2');
-    return date;
-  };
-
   const validatedSecurityCode = (code: string) => {
     code = code.replace(/\D/g, '');
     return code;
   };
 
   useEffect(() => {
-    if (name.length >= 2 && address && numberAddress && numberCard && complement && dueDate && phone && numberOfParcelsAndValue) {
+    if (
+      name.length >= 2 &&
+      address &&
+      numberAddress &&
+      numberCard &&
+      complement &&
+      dueDate &&
+      phone &&
+      numberOfParcelsAndValue
+    ) {
       if (codeSecurity.length >= 3) {
         setDisabledButtonPayment(false);
       } else {
@@ -151,8 +164,84 @@ const confirmPurchase = () => {
     });
   };
 
-  const handleConfirmPayment = () => {
-    console.log('NumberOfParcelsAndValue ', numberOfParcelsAndValue);
+  let userProductDataOfPurchase: UserProductDataOfPurchaseType[] = [];
+
+  for (let i in products) {
+    userProductDataOfPurchase.push({
+      name: products[i].name,
+      image: products[i].image,
+      quantity: products[i].quantity,
+      value: products[i].value,
+    });
+  }
+
+  const handleConfirmPayment = async () => {
+    try {
+      if (
+        !name ||
+        !cardName ||
+        !numberAddress ||
+        !numberCard ||
+        !complement ||
+        !codeSecurity ||
+        !dueDate ||
+        !phone ||
+        !address ||
+        !numberOfInstallments
+      ) {
+        setError('Preencha todos os campos');
+        setTimeout(() => {
+          setError('');
+        }, 1950);
+        return;
+      }
+
+      if (!addressUser) {
+        setWarning('Selecione o endereço de entrega.');
+        setTimeout(() => {
+          setWarning('');
+        }, 1950);
+        return;
+      }
+
+      let result = await apiMakeThePaymentService.makeThePayment({
+        id: user?.id,
+        name,
+        phone,
+        address,
+        numberAddress,
+        complement,
+        dueDate,
+        total: currencyFormatted,
+        userID: user.id,
+        numberParcelOfValue: `${numberOfParcelsAndValue.parcel} X R$ ${numberOfParcelsAndValue.value}`,
+        numberOfCard: numberCard,
+        securityCode: codeSecurity,
+        cardName,
+        userProductDataOfPurchase,
+        deliveryAddress: addressUser,
+      });
+
+      if (result?.error) {
+        setError(result.message);
+        setTimeout(() => {
+          setError('');
+        }, 1950);
+      }
+      if (!result?.error) {
+        setSuccess(result?.message);
+        setTimeout(() => {
+          setSuccess('');
+          setAddProductCart([]);
+          navigate('/profile');
+        }, 1950);
+      }
+    } catch (error) {
+      setError('Ocorreu um erro, tente mais tarde');
+      setTimeout(() => {
+        setError('');
+      }, 1950);
+    }
   };
 
   return (
@@ -179,49 +268,12 @@ const confirmPurchase = () => {
           <styled.TotalContainer>
             <styled.Span>Total: {currencyFormatted ? currencyFormatted : 'R$ 0,00'}</styled.Span>
           </styled.TotalContainer>
+
+          <Address handleSelectNewAddress={handleSelectAddress} />
         </styled.DivisionOne>
 
         <styled.DivisionTwo>
-          <styled.H2>Forma de Pagamento</styled.H2>
-
-          <styled.Paragraph>Escolha a bandeira do cartão.</styled.Paragraph>
-          <styled.ContainerCard>
-            <styled.ContainerCardName>
-              <styled.InputRadio
-                name="card"
-                value="master_card"
-                onChange={(value) => handleCardDataDisplay(value.target.defaultValue)}
-              />
-              <styled.Img src={Master} alt="Cartão master" width={'60px'} />
-            </styled.ContainerCardName>
-
-            <styled.ContainerCardName>
-              <styled.InputRadio
-                name="card"
-                value="visa"
-                onChange={(value) => handleCardDataDisplay(value.target.defaultValue)}
-              />
-              <styled.Img src={Visa} alt="Cartão Visa" width={'60px'} />
-            </styled.ContainerCardName>
-
-            <styled.ContainerCardName>
-              <styled.InputRadio
-                name="card"
-                value="elo"
-                onChange={(value) => handleCardDataDisplay(value.target.defaultValue)}
-              />
-              <styled.Img src={Elo} alt="Cartão elo" width={'60px'} />
-            </styled.ContainerCardName>
-
-            <styled.ContainerCardName>
-              <styled.InputRadio
-                name="card"
-                value="american_express"
-                onChange={(value) => handleCardDataDisplay(value.target.defaultValue)}
-              />
-              <styled.Img src={American_express} alt="Cartão American express" width={'60px'} />
-            </styled.ContainerCardName>
-          </styled.ContainerCard>
+          <TypeCard handleTypeOfCard={handleCardDataDisplay} />
 
           <Card
             isVisible={cardName ? true : false}
@@ -236,6 +288,9 @@ const confirmPurchase = () => {
           />
 
           <styled.ContainerInfoCard isVisible={cardName}>
+            {error && <Error>{error}</Error>}
+            {success && <Success>{success}</Success>}
+            {warning && <Warning>{warning}</Warning>}
             <Select
               label="Numero de parcelas"
               numberOfInstallments={numberOfInstallments}
@@ -244,10 +299,10 @@ const confirmPurchase = () => {
             <Input
               type="text"
               label="Numero do cartão"
-              placeholder="000 1111 2222 3333"
+              placeholder={placeHolder}
               pattern="[0-9]"
               value={numberCard}
-              onChange={(e) => setNumberCard(cardMask(e.target.value as string))}
+              onChange={(e) => setNumberCard(CardMask(e.target.value as string, cardName))}
               onClick={handleFrontOfCard}
             />
             <Input
@@ -256,7 +311,7 @@ const confirmPurchase = () => {
               placeholder="10/29"
               value={dueDate}
               maxlength="5"
-              onChange={(e) => setDueDate(formattedDate(e.target.value as string))}
+              onChange={(e) => setDueDate(FormattedDate(e.target.value as string))}
               width={'120px'}
               onClick={handleFrontOfCard}
             />
@@ -279,7 +334,7 @@ const confirmPurchase = () => {
               placeholder="(00) 9 9999-9999"
               maxlength="15"
               value={phone}
-              onChange={(e) => setPhone(phoneMask(e.target.value as string))}
+              onChange={(e) => setPhone(PhoneMask(e.target.value as string))}
               width={'300px'}
               onClick={handleFrontOfCard}
             />
@@ -315,9 +370,9 @@ const confirmPurchase = () => {
             <Input
               type="text"
               label={'código de segurança'}
-              placeholder={'001'}
+              placeholder={cardName === 'american express' ? '0001' : '001'}
               pattern="[0-9]"
-              maxlength="3"
+              maxlength={maxLengthSecurityCode}
               value={codeSecurity}
               onChange={(e) => setCodeSecurity(validatedSecurityCode(e.target.value as string))}
               width="30%"

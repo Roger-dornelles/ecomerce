@@ -24,6 +24,5 @@ export type ProductProps = {
 
 export type AddProductType = {
   id: number;
-
   form: any;
 };

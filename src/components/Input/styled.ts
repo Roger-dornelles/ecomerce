@@ -14,6 +14,7 @@ export const Label = styled.label`
 interface PropsInput {
   width?: string;
   error?: boolean;
+  disabled?: boolean;
 }
 export const Input = styled.input<PropsInput>`
   width: ${(props) => (props.width ? props.width : '100%')};
@@ -22,6 +23,7 @@ export const Input = styled.input<PropsInput>`
   border: 1px solid #eeeeee;
   border-radius: 4px;
   color: #7f8487;
+  ${(props) => (props.disabled ? 'cursor:not-allowed;' : '')}
 
   &::placeholder {
     color: #cfd2cf;
