@@ -28,7 +28,7 @@ export default {
 
       return {
         error: false,
-        message: null,
+        message: response.message,
         data: response?.data,
       };
     } catch (error) {
