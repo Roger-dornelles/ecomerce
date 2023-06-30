@@ -96,24 +96,20 @@ export const Header = ({ children }: Props) => {
               </li>
             )}
 
-            <li>
-              <Link to={`/carrinho`}>
-                <p>
-                  <BsBasket3Fill />
-                  <Styled.Span visible={addProductCart.length > 0}>{addProductCart.length}</Styled.Span>
-                </p>
-              </Link>
-            </li>
-
-            {user.token && (
+            {addProductCart.length > 0 && (
               <li>
-                <Link to={'/profile'}>Perfil</Link>
+                <Link to={`/carrinho`}>
+                  <p>
+                    <BsBasket3Fill />
+                    <Styled.Span visible={addProductCart.length > 0}>{addProductCart.length}</Styled.Span>
+                  </p>
+                </Link>
               </li>
             )}
 
             {user.token && (
               <li>
-                <Styled.ButtonAddProduct onClick={handleNavigateAddProduct}>Adicionar Produto</Styled.ButtonAddProduct>
+                <Link to={'/profile'}>Perfil</Link>
               </li>
             )}
 
