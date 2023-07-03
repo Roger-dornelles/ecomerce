@@ -32,5 +32,5 @@ export const LI = styled.li<PropsLI>`
   border-bottom-left-radius: 4px;
   border-top-left-radius: 4px;
 
-  ${(props) => (props.active ? 'background-color: #fff' : 'color:#fff')};
+  ${(props) => (props.active ? 'background-color: #fff;' : 'color:#fff')};
 `;

@@ -5,7 +5,7 @@ import { Cadastro } from './pages/Cadastro';
 import { PrivateRoute } from './helpers/authHandler';
 import NotFound from './pages/NotFound';
 import Profile from './pages/Profile';
-import AddProduct from './pages/AddProduct';
+import AddProduct from './pages/Profile/AddProduct';
 import DisplayOneProduct from './pages/DisplayOneProduct';
 import ProductCart from './pages/productCart';
 import ConfirmPurchase from './pages/confirmPurchase';

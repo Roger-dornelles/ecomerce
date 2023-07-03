@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import * as styled from './styled';
 
 interface Props {
@@ -14,6 +14,7 @@ interface ItemsAsideProps {
 const itemsAside = [
   { id: 1, name: 'Dados do usuário', type: 'user' },
   { id: 2, name: 'Histórico de Compras', type: 'purchases' },
+  { id: 3, name: 'Anunciar um Produto', type: 'addProduct' },
 ];
 
 const AsideProfile = ({ typeNavigation }: Props) => {
