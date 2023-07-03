@@ -1,17 +1,18 @@
 import styled from 'styled-components';
 
 export const Container = styled.section`
-  width: 100%;
-  height: 100vh;
+  margin: 0 auto;
+  width: calc(80% - 230px);
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
   color: #000;
+  margin-top: 2.2rem;
 `;
 
 export const form = styled.form`
-  width: 50%;
+  width: 100%;
   display: flex;
   align-items: center;
   flex-direction: column;

@@ -1,9 +1,9 @@
 import { useContext, useRef, useState } from 'react';
 import * as styled from './styled';
 import { BsXLg } from 'react-icons/bs';
-import { Error, Success, Warning } from '../../globalCss';
-import { UserContext } from '../../context/userContext';
-import addProduct from '../../api/addProduct';
+import { Error, Success, Warning } from '../../../globalCss';
+import { UserContext } from '../../../context/userContext';
+import addProduct from '../../../api/addProduct';
 import { useNavigate } from 'react-router-dom';
 
 const quantityFiles = 10;
@@ -140,7 +140,7 @@ const AddProduct = () => {
       {success && <Success>{success}</Success>}
       {warning && <Warning>{warning}</Warning>}
       <styled.form encType="multipart/form-data" onSubmit={handleConfirmPublish}>
-        <h2>Adicionar Produto</h2>
+        <h2>Anunciar um Produto</h2>
         <label>
           Produto
           <input type="text" value={productName} onChange={(e) => setProductName(e.target.value)} />
