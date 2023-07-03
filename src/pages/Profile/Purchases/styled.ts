@@ -15,6 +15,17 @@ export const H2 = styled.h2`
   margin-top: 1rem;
 `;
 
+export const NoPurchase = styled.p`
+  width: 100%;
+  background-color: #e9e9e9;
+  color: #a6a6a6;
+  margin: 0 auto;
+  padding: 1.2rem;
+  text-align: center;
+  margin-top: 1rem;
+  border-radius: 4px;
+`;
+
 interface ContainerPurchaseProps {
   openDetails: boolean;
 }
@@ -39,6 +50,7 @@ export const UL = styled.ul`
 export const LI = styled.li`
   width: 100%;
   display: flex;
+  flex-direction: column;
 `;
 
 export const Button = styled.button`
