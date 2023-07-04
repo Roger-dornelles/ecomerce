@@ -7,14 +7,20 @@ import { useQuery } from 'react-query';
 import DetailsOnePurchase from '../DetailsOnePurchase';
 import { Purchase } from '@/types/purchase';
 
-const Purchases = () => {
+const Purchases = (isVisible: boolean) => {
   const { user } = useContext(UserContext);
 
   const [dataPurchase, setDataPurchase] = useState<Purchase[]>();
 
   const [openDetails, setOpenDetails] = useState<boolean>(false);
+  let result;
+  let isError;
+  if (isVisible) {
+    let { data, isError } = useQuery('purchases', () => apiPurchase.purchases(user.id));
 
-  const { data: result, isError } = useQuery('purchases', () => apiPurchase.purchases(user.id));
+    result = data;
+    isError = isError;
+  }
 
   let arrayPurchase: Purchase[] = [];
   for (let i = 0; i < result?.data.length; i++) {

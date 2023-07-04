@@ -27,16 +27,16 @@ export const signinService = async ({ email, password }: SigninType) => {
         data: null,
       };
     }
-  
+
     return {
       error: false,
       message: result.data.message,
       data: result.data.data,
     };
-  } catch (error) {
+  } catch (error: any) {
     return {
       error: true,
-      message: 'Ocorreu um erro, tente mais tarde',
+      message: error.response.data.message,
       data: null,
     };
   }

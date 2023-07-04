@@ -4,7 +4,7 @@ import { UserType } from '../types/user';
 export default {
   createUser: async ({ name, cpf, email, password, logradouro, number, contact, state }: UserType) => {
     try {
-      if (!name && !cpf && !email && !password && !logradouro && !number && !contact && !state) {
+      if (!name && !cpf && !email && !password && !logradouro && !number && !contact && !state ) {
         return {
           error: true,
           message: 'Preencha todos os campos.',
