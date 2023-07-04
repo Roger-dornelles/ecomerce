@@ -10,7 +10,7 @@ export type UserType = {
   state: string;
   createdAt?: string;
   updatedAt?: string;
-  district: string;
+  district?: string;
 };
 
 export interface NewAddressType {

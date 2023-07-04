@@ -27,6 +27,7 @@ export default {
         data: response?.data,
       };
     } catch (error) {
+      
       return {
         error: true,
         message: 'Ocorreu um erro, tente mais tarde.',
