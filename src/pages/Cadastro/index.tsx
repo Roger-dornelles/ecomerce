@@ -126,6 +126,7 @@ export const Cadastro = () => {
         number,
         contact,
         state: userState,
+
       });
 
       if (response.error) {
