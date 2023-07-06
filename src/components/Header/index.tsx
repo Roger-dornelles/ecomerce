@@ -7,7 +7,7 @@ import { AddCartContext } from '../../context/addCartContext';
 import Cookies from 'js-cookie';
 import JwtVerify from '../../Jwt/index';
 import { JwtPayload } from 'jsonwebtoken';
-import { BsBasket3Fill } from 'react-icons/bs';
+import { BsBasket3Fill, BsJustify, BsXLg } from 'react-icons/bs';
 
 type Props = {
   children: ReactElement;
@@ -17,6 +17,8 @@ export const Header = ({ children }: Props) => {
   const { user, setUser } = useContext(UserContext);
   const { addProductCart }: any = useContext(AddCartContext);
   const navigate = useNavigate();
+
+  const [displayMenuMobile, setDisplayMenuMobile] = useState<boolean>(false);
 
   const token: string | undefined = Cookies.get('token');
   useEffect(() => {
@@ -107,6 +109,88 @@ export const Header = ({ children }: Props) => {
           </ul>
         </nav>
       </Styled.Header>
+
+      <Styled.HeaderMobile>
+        <div>
+          <img src={logo} alt="logomarca" />
+          <strong>Ecommerce</strong>
+        </div>
+        <Styled.MenuMobile>
+          <Styled.ContainerMenuMobile>
+            {addProductCart.length > 0 && (
+              <Link to={`/carrinho`}>
+                <p>
+                  <BsBasket3Fill />
+                  <b>{addProductCart.length}</b>
+                </p>
+              </Link>
+            )}
+
+            <span
+              onClick={() => {
+                setDisplayMenuMobile(!displayMenuMobile);
+              }}
+            >
+              <BsJustify />{' '}
+            </span>
+          </Styled.ContainerMenuMobile>
+
+          <Styled.NavMobile displayMenuMobile={displayMenuMobile}>
+            <p
+              onClick={() => {
+                setDisplayMenuMobile(!displayMenuMobile);
+              }}
+            >
+              <BsXLg />
+            </p>
+            <ul>
+              <li>
+                <Link
+                  to={'/'}
+                  onClick={() => {
+                    setDisplayMenuMobile(!displayMenuMobile);
+                  }}
+                >
+                  Produtos
+                </Link>
+              </li>
+
+              {!user.token && (
+                <li>
+                  <Link
+                    to={`/login`}
+                    onClick={() => {
+                      setDisplayMenuMobile(!displayMenuMobile);
+                    }}
+                  >
+                    Login
+                  </Link>
+                </li>
+              )}
+
+              {user.token && (
+                <li>
+                  <Link
+                    to={'/profile'}
+                    onClick={() => {
+                      setDisplayMenuMobile(!displayMenuMobile);
+                    }}
+                  >
+                    Perfil
+                  </Link>
+                </li>
+              )}
+
+              {user.token && (
+                <li>
+                  <button onClick={handleLogout}>Sair</button>
+                </li>
+              )}
+            </ul>
+          </Styled.NavMobile>
+        </Styled.MenuMobile>
+      </Styled.HeaderMobile>
+
       {children}
     </>
   );
