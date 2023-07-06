@@ -10,7 +10,7 @@ interface PropsInput {
   value?: string;
   onChange?: (e: { target: { value: SetStateAction<string> } }) => void;
   type: 'text' | 'number' | 'tel' | 'email' | 'date';
-  maxlength?: string;
+  maxlength?: string | number;
   error?: boolean;
   disabled?: boolean;
 }
