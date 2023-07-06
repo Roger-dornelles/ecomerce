@@ -11,7 +11,7 @@ export const Section = styled.section`
   display: flex;
   justify-content: flex-start;
   align-items: center;
-  margin: 4rem auto;
+  margin: 2rem auto;
   flex-wrap: wrap;
 
   @media (max-width: 380px) {

@@ -78,34 +78,6 @@ export const Span = styled.span<Props>`
   background-color: #30aadd;
 `;
 
-export const Input = styled.div`
-  width: 20%;
-  display: flex;
-  flex-direction: row;
-  margin-top: -2.5rem;
-
-  form {
-    width: 100%;
-    input {
-      width: 80%;
-      height: 1.9rem;
-      border: none;
-      outline: none;
-      background-color: #fff;
-      border-radius: 5px;
-      color: #000;
-      padding-left: 0.5rem;
-    }
-
-    strong {
-      margin-top: 5px;
-      font-size: 3.5rem;
-      margin-left: 0.5rem;
-      cursor: pointer;
-      font-style: bold;
-    }
-  }
-`;
 
 export const ButtonAddProduct = styled.button`
   display: flex;

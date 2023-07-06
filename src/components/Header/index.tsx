@@ -1,8 +1,7 @@
 import * as Styled from './styled';
 import { Link, useNavigate } from 'react-router-dom';
 import logo from '../../assets/images/logo.png';
-import { BsSearch } from 'react-icons/bs';
-import { ReactElement, useContext, useEffect } from 'react';
+import { ReactElement, useContext, useEffect, useState } from 'react';
 import { JwtPayloads, UserContext } from '../../context/userContext';
 import { AddCartContext } from '../../context/addCartContext';
 import Cookies from 'js-cookie';
@@ -18,8 +17,6 @@ export const Header = ({ children }: Props) => {
   const { user, setUser } = useContext(UserContext);
   const { addProductCart }: any = useContext(AddCartContext);
   const navigate = useNavigate();
-
-  // addProductCart.length === 0 && Cookies.remove('list');
 
   const token: string | undefined = Cookies.get('token');
   useEffect(() => {
@@ -63,10 +60,6 @@ export const Header = ({ children }: Props) => {
     window.location.reload();
   };
 
-  const handleNavigateAddProduct = () => {
-    navigate('/adicionar/produto');
-  };
-
   return (
     <>
       <Styled.Header>
@@ -75,19 +68,12 @@ export const Header = ({ children }: Props) => {
           <strong>Ecommerce</strong>
         </div>
 
-        <Styled.Input>
-          <form>
-            <input type="text" />
-            <strong>
-              <BsSearch />
-            </strong>
-          </form>
-        </Styled.Input>
-
         <nav>
           <ul>
             <li>
-              <Link to={'/'}>Produtos</Link>
+              <Link to={'/'} onClick={() => window.location.reload()}>
+                Produtos
+              </Link>
             </li>
 
             {!user.token && (
