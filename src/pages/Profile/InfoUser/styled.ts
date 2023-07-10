@@ -4,6 +4,14 @@ export const Container = styled.div`
   display: flex;
   width: calc(100% - 230px);
   justify-content: center;
+
+  @media (max-width: 540px) {
+    width: 100%;
+  }
+
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `;
 
 export const Form = styled.form`
@@ -52,41 +60,73 @@ export const Form = styled.form`
         }
       }
     }
+
+    @media (max-width: 540px) {
+      width: 100%;
+    }
+
+    @media (max-width: 1280px) {
+      width: 90%;
+    }
   }
 
-  div {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    width: 50%;
-    padding: 1rem 0;
+  @media (max-width: 540px) {
+    width: 100%;
+  }
 
-    a {
-      text-decoration: none;
-      padding: 0.3rem 0.8rem;
-      border-radius: 4px;
+  @media (max-width: 920px) {
+    width: 100%;
+  }
+`;
+
+export const GroupButton = styled.div`
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 50%;
+  padding: 1rem 0;
+
+  a {
+    text-decoration: none;
+    padding: 0.3rem 0.8rem;
+    border-radius: 4px;
+    transition: all 1.2s;
+    background-color: #f15a59;
+
+    &:hover {
       transition: all 1.2s;
-      background-color: #f15a59;
-
-      &:hover {
-        transition: all 1.2s;
-        background-color: #df2e38;
-      }
+      background-color: #df2e38;
     }
 
-    button {
-      padding: 0.5rem 1.1rem;
-      border-radius: 4px;
-      cursor: pointer;
-      border: none;
-      transition: all 1.2s;
-      background-color: #b3ffae;
-
-      &:hover {
-        transition: all 1.2s;
-        background-color: #38e54d;
-      }
+    @media (max-width: 920px) {
+      width: 100%;
+      text-align: center;
+      margin-bottom: 1rem;
     }
+  }
+
+  button {
+    padding: 0.5rem 1.1rem;
+    border-radius: 4px;
+    cursor: pointer;
+    border: none;
+    transition: all 1.2s;
+    background-color: #b3ffae;
+
+    &:hover {
+      transition: all 1.2s;
+      background-color: #38e54d;
+    }
+
+    @media (max-width: 920px) {
+      width: 100%;
+      text-align: center;
+    }
+  }
+
+  @media (max-width: 920px) {
+    width: 100%;
+    flex-direction: column !important;
   }
 `;
 
@@ -135,5 +175,15 @@ export const NewPassword = styled.div`
         margin-top: 1rem;
       }
     }
+  }
+
+  @media (max-width: 920px) {
+    width: 50%;
+    flex-direction: column !important;
+  }
+
+  @media (max-width: 540px) {
+    width: 100%;
+    flex-direction: column !important;
   }
 `;

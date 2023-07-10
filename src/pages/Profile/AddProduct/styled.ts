@@ -9,6 +9,14 @@ export const Container = styled.section`
   flex-direction: column;
   color: #000;
   margin-top: 2.2rem;
+
+  @media (max-width: 920px) {
+    width: 100%;
+  }
+  @media (min-width: 920px) and (max-width: 1090px) {
+    width: 100%;
+    margin-left: 3rem;
+  }
 `;
 
 export const form = styled.form`
@@ -57,6 +65,10 @@ export const form = styled.form`
     textarea:focus {
       border: 1px solid #a8a8a8;
     }
+
+    @media (max-width: 1020px) {
+      width: 100%;
+    }
   }
 
   div {
@@ -73,6 +85,11 @@ export const form = styled.form`
       cursor: pointer;
       border: none;
       border-radius: 4px;
+
+      @media (max-width: 1020px) {
+        width: 100%;
+        margin-left: 0;
+      }
     }
 
     input[type='number'] {
@@ -83,21 +100,36 @@ export const form = styled.form`
       border: 0;
       border-radius: 5px;
       background-color: #e8e8e8;
+
+      @media (max-width: 1020px) {
+        width: 100%;
+        padding-left: 0;
+      }
     }
 
     input[type='number']:last-child {
       width: 20%;
+      @media (max-width: 1020px) {
+        width: 100%;
+        padding-left: 0;
+      }
     }
 
     select:focus,
     input[type='number']:focus {
       border: 1px solid #a8a8a8;
     }
+
     input[type='number']::-webkit-inner-spin-button,
     input[type='number']::-webkit-outer-spin-button {
       -webkit-appearance: none;
       margin: 0;
       margin-left: 1rem;
+
+      @media (max-width: 1020px) {
+        width: 100%;
+        margin-left: 0;
+      }
     }
 
     input[type='number'] {
@@ -105,27 +137,21 @@ export const form = styled.form`
       appearance: textfield;
       margin: 0;
       margin-left: 1rem;
+
+      @media (max-width: 1020px) {
+        width: 100%;
+        margin-left: 0;
+      }
     }
 
-    input[type='file']::-webkit-file-upload-button {
-      /* visibility: hidden; */
-      display: none;
-    }
-
-    input[type='file']::before {
-      content: 'selecionar';
-      display: inline-block;
-      background: linear-gradient(top, #f9f9f9, #e3e3e3);
-      border: 1px solid #999;
-      border-radius: 3px;
-      padding: 5px 8px;
-      outline: none;
-      white-space: nowrap;
-      -webkit-user-select: none;
-      cursor: pointer;
-      text-shadow: 1px 1px #fff;
-      margin-left: 1rem;
-      margin-right: 0.4rem;
+    @media (max-width: 1020px) {
+      width: 100%;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+      margin: 0 auto;
+      margin-top: 1.2rem;
     }
   }
 
@@ -160,6 +186,33 @@ export const form = styled.form`
       }
     }
   }
+  @media (max-width: 1020px) {
+    width: 100%;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
+`;
+
+export const SelectFiles = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: row !important;
+  align-items: center;
+
+  label {
+    margin-left: 0px;
+    padding-bottom: 0.5rem;
+    margin: 0;
+    @media (max-width: 1020px) {
+      width: 100%;
+      margin: 0 auto;
+      margin-left: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
 `;
 
 export const GroupButtons = styled.div`
@@ -177,6 +230,11 @@ export const GroupButtons = styled.div`
     cursor: pointer;
     border: 0;
     border-radius: 4px;
+
+    @media (max-width: 1020px) {
+      margin-bottom: 1rem;
+      width: 90%;
+    }
   }
 
   button[type='submit'] {
