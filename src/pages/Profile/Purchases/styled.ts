@@ -10,6 +10,11 @@ export const container = styled.div`
   margin-top: 2.2rem;
   border: 1px solid #eeeeee;
   border-radius: 4px;
+  margin-bottom: 2rem;
+
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `;
 export const H2 = styled.h2`
   margin-top: 1rem;
@@ -68,6 +73,10 @@ export const Button = styled.button`
   &:hover {
     background-color: #eee;
   }
+
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
 `;
 
 export const Image = styled.img`
@@ -75,6 +84,12 @@ export const Image = styled.img`
   height: 40px;
   margin: 0.3rem;
   border-radius: 4px;
+
+  @media (max-width: 920px) {
+    margin-bottom: 1rem;
+    width: 50%;
+    height: 50%;
+  }
 `;
 
 interface GroupImagesProps {
@@ -93,14 +108,20 @@ export const Group = styled.div`
   flex-direction: row;
   align-items: center;
   width: 100%;
+  @media (max-width: 920px) {
+    flex-direction: column;
+  }
 `;
 
 export const Paragraph = styled.p`
   width: 50%;
   display: flex;
   margin-left: 1rem;
-`;
-export const ParagraphQuantity = styled(Paragraph)`
-  display: flex;
-  flex-wrap: wrap;
+
+  @media (max-width: 920px) {
+    margin-bottom: 1rem;
+    width: 100%;
+    margin-left: 0;
+    justify-content: center;
+  }
 `;

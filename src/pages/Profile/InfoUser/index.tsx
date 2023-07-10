@@ -445,10 +445,10 @@ const UserInfo = () => {
           )}
         </styled.NewPassword>
 
-        <div>
+        <styled.GroupButton>
           <Link to="/">Cancelar</Link>
           <button>Salvar</button>
-        </div>
+        </styled.GroupButton>
       </styled.Form>
     </styled.Container>
   );

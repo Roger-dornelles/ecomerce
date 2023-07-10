@@ -5,8 +5,7 @@ import apiOneProduct from '../../api/displayOneProduct';
 import { Error, Button } from '../../globalCss';
 import { Pagination } from '../../components/Pagination';
 import { ProductType } from '../../types/product';
-import { AddCartContext, StateProps } from '../../context/addCartContext';
-import Cookies from 'js-cookie';
+import { AddCartContext } from '../../context/addCartContext';
 
 type ProductArrayProps = {
   name: string;
