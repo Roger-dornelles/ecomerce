@@ -8,6 +8,16 @@ export const Container = styled.div`
   padding: 2rem 0;
   margin-top: 2rem;
   border-radius: 4px;
+
+  @media (max-width: 540px) {
+    flex-direction: row;
+    width: 90%;
+  }
+
+  /* @media (max-width: 920px) {
+    flex-direction: row;
+    width: 40%;
+  } */
 `;
 
 export const Nav = styled.nav`
@@ -19,6 +29,10 @@ export const UL = styled.ul`
   list-style: none;
   width: 95%;
   margin-left: 10px;
+
+  @media (max-width: 540px) {
+    margin-left: 18px;
+  }
 `;
 
 interface PropsLI {

@@ -37,6 +37,7 @@ export const Header = styled.header<Props>`
 
       li {
         padding-right: 1rem;
+        cursor: pointer;
 
         a {
           text-decoration: none;

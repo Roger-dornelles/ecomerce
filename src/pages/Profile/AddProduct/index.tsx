@@ -180,10 +180,10 @@ const AddProduct = () => {
           </select>
         </div>
 
-        <div>
-          Selecionar imagem
+        <styled.SelectFiles>
+          <label>Selecionar imagem</label>
           <input type="file" multiple accept="image/jpeg, image/jpg, image/png" onChange={handleFiles} />
-        </div>
+        </styled.SelectFiles>
         <div>
           {uploadedFiles.map((file: any, index: any) => (
             <p key={index}>

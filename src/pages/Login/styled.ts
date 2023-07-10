@@ -1,13 +1,13 @@
-import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 
 export const Container = styled.section`
-  width: 100vw;
+  width: 100%;
   height: 100vh;
   display: flex;
   justify-content: center;
   align-items: center;
   color: #000;
+  margin: 0 auto;
 
   form {
     position: absolute;
@@ -68,6 +68,18 @@ export const Container = styled.section`
         margin-top: 18px;
         color: '#a8a8a8';
       }
+
+      @media (max-width: 280px) {
+        width: 99%;
+      }
+
+      @media (max-width: 540px) {
+        width: 90%;
+      }
+
+      @media (max-width: 920px) {
+        width: 70%;
+      }
     }
 
     div {
@@ -79,12 +91,17 @@ export const Container = styled.section`
 
       a {
         transition: 1s all;
-        width: 35%;
+        min-width: 35%;
         padding: 0.3rem;
         text-decoration: none;
         background-color: #fa465b;
         border-radius: 5px;
         color: #fff;
+
+        @media (max-width: 280px) {
+          width: 80%;
+          margin-bottom: 1rem;
+        }
       }
 
       a:hover {
@@ -101,6 +118,10 @@ export const Container = styled.section`
         padding: 0.3rem;
         border-radius: 5px;
         transition: 1.2s;
+
+        @media (max-width: 280px) {
+          width: 80%;
+        }
       }
 
       button:hover {
@@ -108,7 +129,54 @@ export const Container = styled.section`
         background-color: #18c435;
         box-shadow: 4px 3px 5px #ccc;
       }
+
+      @media (max-width: 280px) {
+        width: 99%;
+        display: flex;
+        margin: 0 auto;
+        flex-direction: column;
+      }
+
+      @media (max-width: 540px) {
+        width: 90%;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      @media (max-width: 920px) {
+        width: 70%;
+        justify-content: space-between;
+        align-items: center;
+      }
     }
+
+    @media (max-width: 280px) {
+      width: 99%;
+      display: flex;
+      margin: 0 auto;
+    }
+
+    @media (max-width: 540px) {
+      width: 90%;
+      display: flex;
+    }
+
+    @media (max-width: 920px) {
+      width: 70%;
+      display: flex;
+    }
+  }
+
+  @media (max-width: 280px) {
+    width: 99%;
+    display: flex;
+    margin: 0 auto;
+  }
+
+  @media (max-width: 540px) {
+    width: 95%;
+    display: flex;
+    margin: 0 auto;
   }
 `;
 
@@ -119,8 +187,15 @@ export const Cadastro = styled.span`
   margin-top: 2rem;
   a {
     color: #000;
-
     padding-left: 0.4rem;
+  }
+
+  @media (max-width: 280px) {
+    width: 99%;
+    display: flex;
+    margin: 0 auto;
+    flex-direction: column;
+    margin-top: 1rem;
   }
 `;
 

@@ -10,8 +10,7 @@ import DeleteUser from './DeleteUser';
 const Profile = () => {
   const [typeNavigation, setTypeNavigation] = useState<string>('user');
 
-  let isVisible: boolean;
-  false;
+  let isVisible: boolean = false;
   const handleNavigation = (type: string) => {
     setTypeNavigation(type);
 

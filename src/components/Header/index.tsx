@@ -62,6 +62,11 @@ export const Header = ({ children }: Props) => {
     window.location.reload();
   };
 
+  const handlePageProducts = () => {
+    navigate('/');
+    window.location.reload();
+  };
+
   return (
     <>
       <Styled.Header>
@@ -72,11 +77,7 @@ export const Header = ({ children }: Props) => {
 
         <nav>
           <ul>
-            <li>
-              <Link to={'/'} onClick={() => window.location.reload()}>
-                Produtos
-              </Link>
-            </li>
+            <li onClick={handlePageProducts}>Produtos</li>
 
             {!user.token && (
               <li>
@@ -144,15 +145,13 @@ export const Header = ({ children }: Props) => {
               <BsXLg />
             </p>
             <ul>
-              <li>
-                <Link
-                  to={'/'}
-                  onClick={() => {
-                    setDisplayMenuMobile(!displayMenuMobile);
-                  }}
-                >
-                  Produtos
-                </Link>
+              <li
+                onClick={() => {
+                  handlePageProducts();
+                  setDisplayMenuMobile(!displayMenuMobile);
+                }}
+              >
+                Produtos
               </li>
 
               {!user.token && (

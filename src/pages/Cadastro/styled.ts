@@ -2,8 +2,9 @@ import styled from 'styled-components';
 
 export const Container = styled.section`
   width: 100%;
-  height: 100vh;
+  height: 100%;
   margin: 0 auto;
+  margin-top: 2rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -46,6 +47,10 @@ export const Form = styled.form`
       padding: 0.4rem 0 0.4rem 0.6rem;
       border-radius: 5px;
       background-color: #f9f9f9;
+
+      @media (max-width: 970px) {
+        width: 95%;
+      }
     }
 
     input:focus {
@@ -62,6 +67,14 @@ export const Form = styled.form`
       border: 0;
       border-radius: 5px;
       padding: 0.4rem 0 0.4rem 0.6rem;
+
+      @media (max-width: 970px) {
+        width: 95%;
+      }
+    }
+
+    @media (max-width: 970px) {
+      width: 95%;
     }
   }
 
@@ -77,7 +90,20 @@ export const Form = styled.form`
         width: 95%;
         padding: 0.4rem 0 0.4rem 0.6rem;
       }
+
+      @media (max-width: 970px) {
+        width: 95%;
+      }
     }
+
+    @media (max-width: 970px) {
+      width: 95%;
+      flex-direction: column;
+    }
+  }
+
+  @media (max-width: 970px) {
+    width: 95%;
   }
 `;
 
@@ -96,6 +122,10 @@ export const GroupButtons = styled.div`
     padding: 0.2rem 0.8rem;
     border-radius: 3px;
     transition: all 1.3s;
+
+    @media (max-width: 970px) {
+      width: 95%;
+    }
   }
 
   a:hover {
@@ -121,5 +151,16 @@ export const GroupButtons = styled.div`
       background-color: #38e54d;
       border: 1px solid #03c988;
     }
+    @media (max-width: 970px) {
+      width: 95%;
+      margin-top: 1rem;
+      margin-left: 0;
+      margin-bottom: 2rem;
+    }
+  }
+
+  @media (max-width: 970px) {
+    width: 95%;
+    flex-direction: column;
   }
 `;

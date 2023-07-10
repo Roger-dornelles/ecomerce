@@ -14,6 +14,8 @@ import {
   ContainerDescription,
   DescriptionRed,
   DescriptionGray,
+  DescriptionPurchaseTitle,
+  DescriptionQuantity,
 } from './styled';
 
 interface Props {
@@ -59,11 +61,11 @@ const detailsOnePurchase = ({ openDetails, handleOpenContainerPurchase, dataPurc
 
       <DescriptionContainer>
         <H2>Descrição da compra</H2>
-        <DescriptionPurchase>
+        <DescriptionPurchaseTitle>
           <Description>Produto</Description>
           <Description>Quantidade</Description>
           <Description>Valor unidade</Description>
-        </DescriptionPurchase>
+        </DescriptionPurchaseTitle>
 
         {userProductDataOfPurchase &&
           userProductDataOfPurchase[0].map((item: UserProductDataOfPurchase, index: number) => {
@@ -72,7 +74,7 @@ const detailsOnePurchase = ({ openDetails, handleOpenContainerPurchase, dataPurc
                 <DescriptionPurchase key={index}>
                   <IMG src={item.image} alt={item.name} />
                   <Description>{item.name}</Description>
-                  <Description>{item.quantity}</Description>
+                  <DescriptionQuantity>{item.quantity}</DescriptionQuantity>
                   <Description>{item.value}</Description>
                 </DescriptionPurchase>
               </>

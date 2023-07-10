@@ -7,6 +7,10 @@ export const Container = styled.div`
   align-items: center;
   margin: 0 auto;
   flex-direction: column;
+
+  @media (max-width: 920px) {
+    width: 100%;
+  }
 `;
 
 export const Info = styled.div`
@@ -18,6 +22,11 @@ export const Info = styled.div`
   padding: 1rem;
   flex-wrap: wrap;
   border-radius: 4px;
+
+  @media (max-width: 920px) {
+    width: 100%;
+    margin-top: 1rem;
+  }
 `;
 
 export const Paragraph = styled.p`
@@ -50,5 +59,9 @@ export const Button = styled.button`
   &:hover {
     background-color: #ff5151;
     transition: 1.2s ease;
+  }
+
+  @media (max-width: 920px) {
+    width: 100%;
   }
 `;
