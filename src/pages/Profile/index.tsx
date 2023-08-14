@@ -1,11 +1,12 @@
 import * as styled from './styled';
 import { useState } from 'react';
 
-import AsideProfile from './AsideProfile';
-import InfoUser from './InfoUser';
-import Purchases from './Purchases';
-import AddProduct from './AddProduct';
-import DeleteUser from './DeleteUser';
+import AsideProfile from '../../components/AsideProfile';
+import InfoUser from '../../components/InfoUser';
+import Purchases from '../../components/Purchases';
+import AddProduct from '../../components/AddProduct';
+import DeleteUser from '../../components/DeleteUser';
+import UserProductList from '../../components/UserProductList';
 
 const Profile = () => {
   const [typeNavigation, setTypeNavigation] = useState<string>('user');
@@ -27,6 +28,7 @@ const Profile = () => {
       {typeNavigation && typeNavigation === 'purchases' && <Purchases isVisible={isVisible} />}
       {typeNavigation && typeNavigation === 'addProduct' && <AddProduct />}
       {typeNavigation && typeNavigation === 'deleteUser' && <DeleteUser />}
+      {typeNavigation && typeNavigation === 'productsUser' && <UserProductList />}
     </styled.Container>
   );
 };

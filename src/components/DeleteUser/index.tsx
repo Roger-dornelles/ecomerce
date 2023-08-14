@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import * as styled from './styled';
-import { UserContext } from '../../../context/userContext';
-import { Error, Success } from '../../../globalCss';
-import apiDeleteUser from '../../../api/deleteUser';
+import { UserContext } from '../../context/userContext';
+import { Error, Success } from '../../globalCss';
+import apiDeleteUser from '../../api/deleteUser';
 import { useNavigate } from 'react-router-dom';
 import Cookies from 'js-cookie';
 
