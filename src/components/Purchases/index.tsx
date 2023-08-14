@@ -1,8 +1,8 @@
 import { useContext, useState } from 'react';
 import * as styled from './styled';
-import { UserContext } from '../../../context/userContext';
-import apiPurchase from '../../../api/purchases';
-import { Error, Warning, Success } from '../../../globalCss';
+import { UserContext } from '../../context/userContext';
+import apiPurchase from '../../api/purchases';
+import { Error, Warning, Success } from '../../globalCss';
 import { useQuery } from 'react-query';
 import DetailsOnePurchase from '../DetailsOnePurchase';
 import { Purchase } from '@/types/purchase';

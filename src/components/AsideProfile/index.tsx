@@ -15,7 +15,8 @@ const itemsAside = [
   { id: 1, name: 'Dados do usuário', type: 'user' },
   { id: 2, name: 'Histórico de Compras', type: 'purchases' },
   { id: 3, name: 'Anunciar um Produto', type: 'addProduct' },
-  { id: 4, name: 'Excluir Conta', type: 'deleteUser' },
+  { id: 4, name: 'Produtos Anunciados', type: 'productsUser' },
+  { id: 5, name: 'Excluir Conta', type: 'deleteUser' },
 ];
 
 const AsideProfile = ({ typeNavigation }: Props) => {

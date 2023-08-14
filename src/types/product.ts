@@ -26,3 +26,12 @@ export type AddProductType = {
   id: number;
   form: any;
 };
+
+export interface UpdateOneProductType {
+  id: number;
+  name: string;
+  description: string;
+  value: number | string;
+  isInstallments: boolean | string | undefined;
+  quantity: number | string;
+}
