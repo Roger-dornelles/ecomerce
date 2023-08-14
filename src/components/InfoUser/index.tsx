@@ -1,14 +1,14 @@
 import * as styled from './styled';
-import { Error, Warning, Success } from '../../../globalCss';
+import { Error, Warning, Success } from '../../globalCss';
 import { BsPencilSquare } from 'react-icons/bs';
 import { useContext, useEffect, useState } from 'react';
-import apiState from '../../../api/states';
-import apiUpdateUser from '../../../api/updateUser';
-import apiUserInfo from '../../../api/userInfo';
+import apiState from '../../api/states';
+import apiUpdateUser from '../../api/updateUser';
+import apiUserInfo from '../../api/userInfo';
 import { Link } from 'react-router-dom';
 import { useNavigate } from 'react-router';
-import { UserContext } from '../../../context/userContext';
-import { UserType } from '../../../types/user';
+import { UserContext } from '../../context/userContext';
+import { UserType } from '../../types/user';
 import { useMutation, useQuery } from 'react-query';
 
 type DisabledType = {

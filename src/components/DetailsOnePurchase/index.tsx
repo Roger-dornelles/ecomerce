@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { DeliveryAddress, Purchase, UserProductDataOfPurchase } from '../../../types/purchase';
+import { DeliveryAddress, Purchase, UserProductDataOfPurchase } from '../../types/purchase';
 import { BsXLg } from 'react-icons/bs';
 import {
   Description,

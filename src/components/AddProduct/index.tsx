@@ -1,9 +1,9 @@
 import { useContext, useRef, useState } from 'react';
 import * as styled from './styled';
 import { BsXLg } from 'react-icons/bs';
-import { Error, Success, Warning } from '../../../globalCss';
-import { UserContext } from '../../../context/userContext';
-import addProduct from '../../../api/addProduct';
+import { Error, Success, Warning } from '../../globalCss';
+import { UserContext } from '../../context/userContext';
+import addProduct from '../../api/addProduct';
 import { useNavigate } from 'react-router-dom';
 
 const quantityFiles = 10;
