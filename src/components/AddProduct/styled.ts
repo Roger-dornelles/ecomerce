@@ -92,7 +92,8 @@ export const form = styled.form`
       }
     }
 
-    input[type='number'] {
+    input[type='number'],
+    input[type='text'] {
       width: 15%;
       height: 2rem;
       padding-left: 1rem;

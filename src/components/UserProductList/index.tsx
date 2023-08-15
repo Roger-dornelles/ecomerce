@@ -7,17 +7,18 @@ import { ProductType } from '../../types/product';
 import { Error } from '../../globalCss';
 import ProductList from '../ProductList';
 import UpdateOneProduct from '../updateOneProduct';
+import DeleteProduct from '../DeleteProduct';
 
 const UserProductList = () => {
   const { user } = useContext(UserContext);
 
   const [productList, setProductList] = useState<ProductType[]>([]);
   const [editUserProduct, setEditUserProduct] = useState<ProductType>();
-
+  const [deleteOneProduct, setDeleteOneProduct] = useState<ProductType>();
   const [typeComponent, setTypeComponent] = useState<string>('productList');
 
   const [error, setError] = useState<string>('');
-  useQuery('userProductList', () =>
+  const { refetch } = useQuery('userProductList', () =>
     apiProductList
       .productList(user.id)
       .then((result) => {
@@ -55,8 +56,17 @@ const UserProductList = () => {
     }
   };
 
-  const deleteProduct = (item: number) => {
-    console.log('click Delete ', item);
+  const deleteProduct = (item: ProductType) => {
+    if (item) {
+      setTypeComponent('deleteProduct');
+      setDeleteOneProduct(item);
+    }
+  };
+
+  const handleCloseDeleteProduct = (value: boolean) => {
+    if (value) {
+      setTypeComponent('productList');
+    }
   };
 
   return (
@@ -66,6 +76,10 @@ const UserProductList = () => {
       )}
       {typeComponent === 'updateProduct' && (
         <UpdateOneProduct product={editUserProduct} closeUpdateProduct={closeUpdateProduct} />
+      )}
+
+      {typeComponent === 'deleteProduct' && (
+        <DeleteProduct deleteProduct={deleteOneProduct} handleCloseDeleteProduct={handleCloseDeleteProduct} refetch={refetch} />
       )}
     </S.Container>
   );

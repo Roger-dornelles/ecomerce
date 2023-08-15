@@ -7,7 +7,7 @@ import { ProductType } from '../../types/product';
 
 interface ProductListProps {
   productList: ProductType[];
-  deleteProduct: (value: number) => void;
+  deleteProduct: (value: ProductType) => void;
   editProduct: (product: ProductType) => void;
   error: string;
 }
@@ -19,10 +19,9 @@ const ProductList = ({ productList, editProduct, deleteProduct, error }: Product
     }
   };
 
-  const handleClickDelete = (id: number) => {
-    if (id) {
-      deleteProduct(id);
-      console.log('click Delete ', id);
+  const handleClickDelete = (item: ProductType) => {
+    if (item) {
+      deleteProduct(item);
     }
   };
 
@@ -44,7 +43,7 @@ const ProductList = ({ productList, editProduct, deleteProduct, error }: Product
                       Editar
                     </S.Button>
 
-                    <S.Button onClick={() => handleClickDelete(item.id)} background={'#ff4f4f'}>
+                    <S.Button onClick={() => handleClickDelete(item)} background={'#ff4f4f'}>
                       <BsTrash style={{ marginRight: '0.3rem' }} />
                       Excluir
                     </S.Button>
