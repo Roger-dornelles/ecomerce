@@ -53,6 +53,27 @@ const AddProduct = () => {
     handleUploadFiles(chosenFiles);
   };
 
+  const MaskMoney = (value: string) => {
+    console.log('value ', value);
+    var valor = value.replace(/[^\d]+/gi, '');
+    var resultado = '';
+    var mascara = '';
+    valor.length === 5 ? (mascara = '###,##') : (mascara = '###.###,##');
+    for (var x = 0, y = 0; x < mascara.length && y < valor.length; ) {
+      if (mascara.charAt(x) != '#') {
+        resultado += mascara.charAt(x);
+        x++;
+      } else {
+        resultado += valor.charAt(y);
+        y++;
+        x++;
+      }
+    }
+    value = `${resultado}`;
+
+    return value;
+  };
+
   const handleConfirmPublish = async (e: { preventDefault: () => void }) => {
     e.preventDefault();
 
@@ -164,10 +185,10 @@ const AddProduct = () => {
         <div>
           Valor
           <input
-            type="number"
-            pattern="[0-9]*"
+            type="text"
+            // pattern="[0-9]*"
             value={productValue}
-            onChange={(e) => setProductValue(e.target.value)}
+            onChange={(e) => setProductValue(MaskMoney(e.target.value))}
           />
         </div>
 

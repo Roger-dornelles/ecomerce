@@ -7,15 +7,15 @@ import apiUpdate from '../../api/updateOneProduct';
 import { Error, Success } from '../../globalCss';
 
 interface UpdateOneProductProps {
-  product: ProductType;
+  product: ProductType | undefined;
   closeUpdateProduct: (value: boolean) => void;
 }
 
 const UpdateOneProduct = ({ product, closeUpdateProduct }: UpdateOneProductProps) => {
-  const [name, setName] = useState<string>(product?.name);
-  const [description, setDescription] = useState<string>(product?.description);
-  const [value, setValue] = useState<string>(product?.value);
-  const [quantity, setQuantity] = useState<number>(product?.quantity);
+  const [name, setName] = useState<string | undefined>(product?.name);
+  const [description, setDescription] = useState<string | undefined>(product?.description);
+  const [value, setValue] = useState<string | undefined>(product?.value);
+  const [quantity, setQuantity] = useState<number | undefined>(product?.quantity);
   let [isInstallments, setIsInstallments] = useState<string | boolean>();
 
   const [error, setError] = useState<string>('');
@@ -62,7 +62,7 @@ const UpdateOneProduct = ({ product, closeUpdateProduct }: UpdateOneProductProps
   };
 
   const productUpdate = {
-    id: product.id,
+    id: product?.id,
     name,
     description,
     value,
