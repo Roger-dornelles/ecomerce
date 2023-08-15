@@ -8,7 +8,13 @@ export type ProductType = {
   updatedAt: string;
   userID: number;
   value: string;
-  photosID: number[] | number;
+  photosID: {
+    id: number;
+    link: string;
+    userID: string;
+    createdAt: string;
+    updatedAt: string;
+  };
   disabled?: boolean;
 };
 
