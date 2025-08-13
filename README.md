@@ -1,6 +1,6 @@
 # ecommerce
 
-# 	:rotating_light: :construction: EM DESENVOLVIMENTO 	:rotating_light:
+
 
 ### :pencil2:  Descrição
 
